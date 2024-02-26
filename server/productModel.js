@@ -27,16 +27,16 @@ export const Product = await sequelize.define('product', {
 }); 
 
 
-await sequelize.sync({alter:true})
+ sequelize.sync({alter:true})
 
- await Product.bulkCreate([
-  { name: 'Платье' ,
-    price: 300,
-    image: "image/1.jpg"
-},
-  { name: 'Фата',
-  price: 100.23,
-  image: "image/2.jpg"
+//  await Product.bulkCreate([
+//   { name: 'Платье' ,
+//     price: 300,
+//     image: "image/1.jpg"
+// },
+//   { name: 'Фата',
+//   price: 100.23,
+//   image: "image/2.jpg"
 
-}
-]);
+// }
+// ]);

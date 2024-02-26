@@ -5,10 +5,10 @@ import { useQuery } from "react-query";
 const ElementCatalog = ({ product }) => {
   return (
     <div className="catalog">
-      <h1>{product.name}</h1>
+      <h3>{product.name}</h3>
       <img src={product.image} />
-      <p>{product.price}</p>
-      <button className="buy">Купить</button>
+      <p>{product.price} руб</p>
+      <button className="buy">Добавить в корзину</button>
     </div>
   );
 };
