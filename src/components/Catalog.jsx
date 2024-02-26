@@ -6,7 +6,7 @@ const ElementCatalog = ({ product }) => {
   return (
     <div className="catalog">
       <h1>{product.name}</h1>
-      <img src="image/1.jpg" />
+      <img src={product.image} />
       <p>{product.price}</p>
       <button className="buy">Купить</button>
     </div>
