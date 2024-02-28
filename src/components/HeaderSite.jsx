@@ -29,10 +29,10 @@ export const HeaderSite = () => {
           </div>
         </li>
         <li>
-        <NavLink to = "/entrance" ><i class="basket fa-solid fa-basket-shopping"></i></NavLink>
+        <NavLink to = "/basket" ><i class="basket fa-solid fa-basket-shopping"></i></NavLink>
         </li>
         <li>
-        <NavLink to = "/registration" ><i className="fa-solid fa-user" /></NavLink>
+        <NavLink to = "/entrance" ><i className="fa-solid fa-user" /></NavLink>
         </li>
       </ul>
     </div>

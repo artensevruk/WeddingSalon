@@ -1,7 +1,7 @@
 import { Sequelize , DataTypes, INTEGER, DECIMAL } from "sequelize";
 import { sequelize } from "./connectDatabase.js";
 
-export const Product = await sequelize.define('product', {
+export const Product = sequelize.define('product', {
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER.UNSIGNED,
