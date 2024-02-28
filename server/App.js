@@ -22,7 +22,7 @@ app.get("/cartProduct", async function (req, res) {
 });
 
 app.delete("/cartProduct/:id" , async function(req , res){
- CartProduct.destroy({
+ await CartProduct.destroy({
   where:{
     id: req.params.id
   }
@@ -33,7 +33,7 @@ res.end()
 app.post("/carts", async function (req, res) {
   const product = await Product.findOne({ where: { id: req.body.id } });
 
-  CartProduct.create(
+  await CartProduct.create(
     { quantity: 1, productId: req.body.id  }
   );
   res.end()

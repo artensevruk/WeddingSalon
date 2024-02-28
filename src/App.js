@@ -25,5 +25,9 @@ function App() {
   );
 }
 
+getData();
+getDataBasket();
+
+
 
 export default App;
