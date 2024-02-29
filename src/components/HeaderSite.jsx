@@ -3,6 +3,7 @@ export const HeaderSite = () => {
   return (
     <div className="logo">
       <ul className="menu">
+        <li><NavLink to = "/home" ><i class="fa-solid fa-house"></i></NavLink></li>
         <li>
           <div className="information">
             <i class="local fa-solid fa-location-dot"></i>

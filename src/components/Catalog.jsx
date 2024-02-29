@@ -21,7 +21,7 @@ const ElementCatalog = ({ product }) => {
       <h3>{product.name}</h3>
       <img src={product.image} />
       <p>{product.price} руб</p>
-      <button onClick={addBasket} className="buy">Добавить в корзину</button>
+      <button onClick={addBasket} className="buy2">Добавить в корзину</button>
     </div>
   );
 };

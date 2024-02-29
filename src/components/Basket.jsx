@@ -28,7 +28,7 @@ const ElementBasket = ({ productBasket }) => {
       <img src={productBasket.product.image} />
       <p>{productBasket.product.price} руб</p>
       <button onClick={mutation.mutate} className="buy">
-        Удалить
+      <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
   );
@@ -41,9 +41,12 @@ export const Basket = () => {
       <div className="title">
         <h1>Корзина</h1>
       </div>
+      <div className="containerProducts">
       {(query.data || []).map((productBasket) => (
         <ElementBasket key={productBasket.id} productBasket={productBasket} />
       ))}
+      </div>
+      <div/>
     </div>
   );
 };

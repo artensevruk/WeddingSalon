@@ -9,7 +9,7 @@ import { Catalog } from './components/Catalog';
 import { Logo } from './components/Logo';
 import { Entrance } from './components/Entrance';
 import { Basket } from './components/Basket';
-
+import { SortCatalog } from './components/SortCatalog';
 
 
 
@@ -28,8 +28,8 @@ import { Basket } from './components/Basket';
           element: <Basket />
         },
           {
-            path: "",
-            element: <> <Logo /><Catalog /> </> 
+            path: "home",
+            element: <> <Logo /><SortCatalog /><Catalog /> </> 
           },
         ],
       },

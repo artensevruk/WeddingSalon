@@ -127,9 +127,26 @@ body {
   margin: 10px;
   color: white;
   padding: 16px 30px 16px 30px;
-  border-radius: 20px;
+  border-radius: 60%;
+  padding: 10px 17px 10px 17px;
   border: 4px solid white;
   background-color: #da81ca;
+}
+.buy2{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 30px 16px 30px;
+  border-radius: 20px;
+  border: 2px solid white;
+  background-color: #da81ca;
+}
+.buy2:hover{
+  color: #da81ca;
+  background-color: white;
+  cursor: pointer;
 }
 .buy:hover{
   color: #da81ca;
@@ -223,6 +240,57 @@ cursor: pointer;
 }
 .basket{
   text-align: center;
+}
+.sortCatalog{
+  padding: 10px 120px 10px 120px;
+}
+.sortCatalog ul{
+align-items: center;
+justify-content: center;
+text-align: center;
+list-style-type: none;
+  display: flex;
+  font-size: calc(5px + 12 * (100vw / 1500));
+ 
+  padding: 10px 0px 10px 0px;
+ 
+  gap: 20%;
+}
+.containerProducts{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  gap: 20%;
+}
+.sortCatalog ul li{
+  font-weight: 900;
+  padding: 10px;
+  background-size: 100%;
+  border-radius: 50%;
+  padding:10px;
+  border: 1px solid white;
+  animation: borderColor 2s ease infinite;
+}
+.sortCatalog ul li:hover{
+  cursor: pointer;
+  background: #da81ca;
+  color: white;
+}
+@keyframes borderColor {
+  0%{
+    border: 1px solid white;
+  }
+  50%{
+    border: 1px solid #da81ca;
+  }
+  80%{
+    border: 1px solid #d73cbb;
+  }
+  100%{
+    border: 1px solid white;
+  }
 }
 .title{
   text-align: center;
