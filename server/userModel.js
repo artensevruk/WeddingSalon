@@ -1,7 +1,8 @@
 import { Sequelize , DataTypes, INTEGER, DECIMAL } from "sequelize";
 import { sequelize } from "./connectDatabase.js";
 
-export const Product = sequelize.define('product', {
+
+export const  User = sequelize.define('user', {
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER.UNSIGNED,
@@ -12,31 +13,21 @@ export const Product = sequelize.define('product', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  price: {
-    type: DataTypes.DECIMAL(10 , 2),
+  surname: {
+    type: DataTypes.STRING,
     allowNull: false
   },
-  image: {
-    type: DataTypes.TEXT,
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.STRING,
     allowNull: false
   }
-  
 }, {
-  timestamps: false
+  timestamps: false,
+
   // Other model options go here
 }); 
 
-
-
-
- await Product.bulkCreate([
-  { name: 'Платье(Королева)' ,
-    price: 1100.00,
-    image: "image/4.jpg"
-},
-  { name: 'Платье(Длинное в пол)',
-  price: 140.00,
-  image: "image/6.jpg"
-
-}
-]);

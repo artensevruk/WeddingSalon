@@ -120,7 +120,7 @@ body {
 .Contact ul i {
   color: aliceblue;
 }
-.buy{
+.bay{
   font-family: "Playfair Display";
   font-size: calc(3px + 12 * (100vw / 1500));
   margin-top: 40px;
@@ -132,7 +132,25 @@ body {
   border: 4px solid white;
   background-color: #da81ca;
 }
-.buy2{
+.bay3{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 20px 16px 20px;
+  border-radius: 30px;
+  padding: 10px 17px 10px 17px;
+  border: 4px solid white;
+  background-color: #da81ca;
+}
+.bay3:hover{
+  color: #da81ca;
+  border: 4px solid #da81ca;
+  background-color: white;
+  cursor: pointer;
+}
+.bay2{
   font-family: "Playfair Display";
   font-size: calc(3px + 12 * (100vw / 1500));
   margin-top: 40px;
@@ -143,12 +161,27 @@ body {
   border: 2px solid white;
   background-color: #da81ca;
 }
-.buy2:hover{
+.entranceToRegestration{
+  font-size: 10px;
+  color: white;
+  text-decoration:underline;
+}
+.entranceToRegestration:hover{
+  color: black;
+  cursor: pointer;
+}
+.select{
+  background: #da81ca;
+  padding: 8px;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+.bay2:hover{
   color: #da81ca;
   background-color: white;
   cursor: pointer;
 }
-.buy:hover{
+.bay:hover{
   color: #da81ca;
   border: 4px solid #da81ca;
   background-color: white;

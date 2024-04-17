@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { getDataBasket } from "../getDataBasket";
 import { useMutation, useQueryClient } from "react-query";
 
+
 const ElementBasket = ({ productBasket }) => {
   const queryClient = useQueryClient();
 
@@ -27,8 +28,11 @@ const ElementBasket = ({ productBasket }) => {
       <h3>{productBasket.product.name}</h3>
       <img src={productBasket.product.image} />
       <p>{productBasket.product.price} руб</p>
-      <button onClick={mutation.mutate} className="buy">
+      <button onClick={mutation.mutate} className="bay">
       <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button className="bay3">
+     Купить
       </button>
     </div>
   );

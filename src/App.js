@@ -26,8 +26,6 @@ function App() {
   );
 }
 
-getData();
-getDataBasket();
 
 
 
