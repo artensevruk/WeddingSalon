@@ -1,0 +1,1 @@
+{"id":37,"name":"Платье","price":"299.00","image":"image/5.jpg","sizes":[{"id":12,"size":"M","productId":37}],"colors":[{"id":12,"color":"Фиолетовый","productId":37}],"categories":[{"id":12,"categories":"укороченное","productId":37}]}]

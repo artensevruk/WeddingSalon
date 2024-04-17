@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import { HeaderSite } from './components/HeaderSite';
+import { Catalog } from './components/Catalog';
+import { Logo } from './components/Logo';
+import { getData } from './getData';
+import { getDataBasket } from './getDataBasket';
+import { Basement } from './components/Basement';
+import { Outlet } from 'react-router-dom';
+
+
+import {
+  QueryClient,
+  QueryClientProvider
+} from 'react-query';
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <QueryClientProvider client={queryClient}>
+    <div className='container'>
+    <HeaderSite />
+    <Outlet />
+    <Basement />
     </div>
+    </QueryClientProvider>
   );
 }
+
+
+
 
 export default App;
