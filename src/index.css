@@ -330,6 +330,19 @@ list-style-type: none;
   padding-top: 50px;
   padding-bottom: 50px;
 }
+.last{
+  font-family: "Playfair Display";
+  border: 2px solid  #da81ca;
+  padding: 10px;
+  border-radius: 20px;
+  background: #ffffff;
+  color: black;
+}
+.last:hover{
+  background: black;
+  color:  #ffffff;
+  cursor: pointer;
+}
 .bloc button{
   font-family: "Playfair Display";
   border: 2px solid  #da81ca;
