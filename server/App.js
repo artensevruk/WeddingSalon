@@ -13,6 +13,7 @@ import { Color } from "./colorModel.js";
 import { User } from "./userModel.js";
 import { Categories } from "./categoriesModel.js";
 import { sequelize } from "./connectDatabase.js";
+import jwt from "jsonwebtoken"
 //Импортируются необходимые модули express, cors, модели (Product, CartProduct, Size, Color, Categories)
 // и функции из библиотеки @testing-library/react.
 
@@ -47,12 +48,16 @@ app.get("/registration", async function (req, res) {
 
 app.post("/entrance" , async function (req , res) { //req - запрос res - ответ 
   const { email, password } = req.body; // Получение введенных данных из запроса
-
+  
+  const secretKey = 'yourSecretKey';
+  const token = jwt.sign({ email }, secretKey );
+  
   try {
   const user = await User.findOne({ where: { email: email, password: password } }); // Поиск пользователя по имени и паролю
+  
 
   if (user) {
-    res.send("Вход выполнен успешно"); // Если пользователь найден, отправить сообщение об успешном входе
+    res.send({token}); // Если пользователь найден, отправить сообщение об успешном входе
   } else {
     res.status(401).send("Неверное имя пользователя или пароль"); // Если пользователь не найден, отправить сообщение об ошибке
   }
@@ -60,6 +65,9 @@ app.post("/entrance" , async function (req , res) { //req - запрос res - �
   res.status(500).send({ error: 'Ошибка при выполнении запроса к базе данных' });
 }
     
+
+console.log(token);
+
 })
 
 

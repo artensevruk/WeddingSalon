@@ -33,17 +33,23 @@ export const deleteBasket = (productBasket) => {
   })
 };
 
-export const entranceData =(data) =>{
-fetch('http://localhost:8081/entrance', {
+export const entranceData = async (data) => {
+  try {
+    const response = await fetch('http://localhost:8081/entrance', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    })
-    .then(result => console.log(result))
-    .catch(error => console.error(error));
+    });
+    const token = response.json()
+    token.then((value) =>{ console.log(value) 
+      localStorage.setItem("jwtToken", value.token);
+    });
+  } catch (error) {
+    console.error(error);
   }
+}
 
   export const regestrationData = (data) =>{
   fetch('http://localhost:8081/registration', {
@@ -57,3 +63,4 @@ fetch('http://localhost:8081/entrance', {
       .catch(error => console.error(error));
       console.log(data)
 }
+
