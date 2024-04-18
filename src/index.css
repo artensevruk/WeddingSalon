@@ -170,6 +170,14 @@ body {
   color: black;
   cursor: pointer;
 }
+.videoContainer{
+  text-align: center;
+  margin: 50px 0px 50px 0px;
+}
+.video{
+  border: 2px solid white;
+  border-radius: 20px;
+}
 .select{
   background: #da81ca;
   padding: 8px;

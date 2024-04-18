@@ -10,7 +10,7 @@ import { Logo } from './components/Logo';
 import { Entrance } from './components/Entrance';
 import { Basket } from './components/Basket';
 import { SortCatalog } from './components/SortCatalog';
-
+import { Video } from './components/Video';
 
 
   const router = createBrowserRouter(
@@ -33,7 +33,7 @@ import { SortCatalog } from './components/SortCatalog';
         },
           {
             path: "home",
-            element: <> <Logo /><SortCatalog /><Catalog /> </> 
+            element: <> <Logo /><SortCatalog /><Video /><Catalog /> </> 
           },
         ],
       },
