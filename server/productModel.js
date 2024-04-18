@@ -29,14 +29,14 @@ export const Product = sequelize.define('product', {
 
 
 
- await Product.bulkCreate([
-  { name: 'Платье(Королева)' ,
-    price: 1100.00,
-    image: "image/4.jpg"
-},
-  { name: 'Платье(Длинное в пол)',
-  price: 140.00,
-  image: "image/6.jpg"
+//  await Product.bulkCreate([
+//   { name: 'Платье(Королева)' ,
+//     price: 1100.00,
+//     image: "image/4.jpg"
+// },
+//   { name: 'Платье(Длинное в пол)',
+//   price: 140.00,
+//   image: "image/6.jpg"
 
-}
-]);
+// }
+// ]);

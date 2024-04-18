@@ -38,7 +38,30 @@ app.get("/cartProduct", async function (req, res) {
   const result = await CartProduct.findAll({ include: [Product] });
   res.send(result);
 });
+
+app.get("/registration", async function (req, res) {
+  const users = await User.findAll();
+  res.send(users);
+});
 // GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
+
+app.post("/entrance" , async function (req , res) { //req - запрос res - ответ 
+  const { email, password } = req.body; // Получение введенных данных из запроса
+
+  try {
+  const user = await User.findOne({ where: { email: email, password: password } }); // Поиск пользователя по имени и паролю
+
+  if (user) {
+    res.send("Вход выполнен успешно"); // Если пользователь найден, отправить сообщение об успешном входе
+  } else {
+    res.status(401).send("Неверное имя пользователя или пароль"); // Если пользователь не найден, отправить сообщение об ошибке
+  }
+} catch (error) {
+  res.status(500).send({ error: 'Ошибка при выполнении запроса к базе данных' });
+}
+    
+})
+
 
 app.delete("/cartProduct/:id" , async function(req , res){
  await CartProduct.destroy({

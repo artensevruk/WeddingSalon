@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import React from 'react';
 
 export const Registration = () =>{
@@ -43,6 +44,11 @@ export const Registration = () =>{
         <div className="bloc">
         <input type="password" name="password" placeholder="ВВЕДИТЕ ПОРОЛЬ"></input>
         </div>
+        <NavLink to="/entrance">
+      <p className="entranceToRegestration">
+            Вы уже зарегистрировались ?
+          </p>
+      </NavLink>
         <div className="bloc">
           <button type="submit">ОТПРАВИТЬ</button>
         </div>
