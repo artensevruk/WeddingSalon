@@ -1,23 +1,15 @@
 
 import { useQuery } from "react-query";
-import { getDataBasket } from "../getDataBasket";
+import { getDataBasket , deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
 
 
 const ElementBasket = ({ productBasket }) => {
   const queryClient = useQueryClient();
 
-  const deleteBasket = () => {
-    return fetch(`http://localhost:8081/cartProduct/${productBasket.id}`, {
-      method: "DELETE", // Здесь так же могут быть GET, PUT, DELETE
-      headers: {
-        // Добавляем необходимые заголовки
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-  };
+  const deleteBasketId = () => deleteBasket(productBasket)
 
-  const mutation = useMutation(deleteBasket, {
+  const mutation = useMutation(deleteBasketId, {
     onSuccess: () => { 
       queryClient.refetchQueries("productBasket");
     },

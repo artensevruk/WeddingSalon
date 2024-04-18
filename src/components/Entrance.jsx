@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import { entranceData } from "../api";
 
 
 export const Entrance = () => {
@@ -13,16 +13,8 @@ export const Entrance = () => {
       email: formData.get('email'),
       password: formData.get('password')
     };
-
-    fetch('http://localhost:8081/entrance', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(result => console.log(result))
-    .catch(error => console.error(error));
+    
+    entranceData(data);
     
   };
 
@@ -43,7 +35,7 @@ export const Entrance = () => {
           </p>
         </NavLink>
         <div className="bloc">
-          <button>ОТПРАВИТЬ</button>
+          <button >ОТПРАВИТЬ</button>
         </div>
       </form>
     </div>

@@ -1,18 +1,12 @@
-import goods from "../Catalog.json";
-import { getData } from "../getData";
+import { getData  , addBasket } from "../api";
 import { useQuery } from "react-query";
 
+
+
 const ElementCatalog = ({ product }) => {
-  const addBasket = () => {
-    fetch("http://localhost:8081/carts", {
-      method: "POST", // Здесь так же могут быть GET, PUT, DELETE
-      body: JSON.stringify(product), // Тело запроса в JSON-формате
-      headers: {
-        // Добавляем необходимые заголовки
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }).then(() => console.log("Hello"));
-  };
+
+  const addBasketProducts = () => addBasket(product)
+
 
   return (
     <div className="catalog">
@@ -40,7 +34,7 @@ const ElementCatalog = ({ product }) => {
       <p>{product.price} руб</p>
 
 
-      <button onClick={addBasket} className="bay2">
+      <button onClick={addBasketProducts} className="bay2">
         Добавить в корзину
       </button>
     </div>
