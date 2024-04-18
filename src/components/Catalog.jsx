@@ -1,5 +1,4 @@
-import goods from "../Catalog.json";
-import { getData } from "../getData";
+import { getData } from "../api";
 import { useQuery } from "react-query";
 
 const ElementCatalog = ({ product }) => {

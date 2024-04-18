@@ -1,6 +1,6 @@
 
 import { useQuery } from "react-query";
-import { getDataBasket } from "../getDataBasket";
+import { getDataBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
 
 
