@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import React from 'react';
+import { regestrationData } from "../api";
+
 
 export const Registration = () =>{
 
@@ -14,17 +16,8 @@ export const Registration = () =>{
       email: formData.get('email'),
       password: formData.get('password')
     };
-
-    fetch('http://localhost:8081/registration', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  })
-      .then(result => console.log(result))
-      .catch(error => console.error(error));
-      console.log(data)
+    regestrationData(data)
+    
   };
 
 
