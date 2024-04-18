@@ -1,8 +1,8 @@
 
 import { useQuery } from "react-query";
-import { getDataBasket } from "../api";
+import { getDataBasket , deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteBasket } from "../api";
+
 
 const ElementBasket = ({ productBasket }) => {
   const queryClient = useQueryClient();

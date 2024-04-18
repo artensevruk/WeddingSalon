@@ -1,6 +1,6 @@
-import { getData } from "../api";
+import { getData  , addBasket } from "../api";
 import { useQuery } from "react-query";
-import { addBasket } from "../api";
+
 
 
 const ElementCatalog = ({ product }) => {
