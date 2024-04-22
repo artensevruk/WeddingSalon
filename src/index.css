@@ -48,6 +48,22 @@ body {
   text-align: center;
 }
 
+
+
+.purchased {
+  border: 2px solid green;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+}
+
+.not-purchased {
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  border: 2px solid red;
+}
+
 .local2{
   padding: 10px 12px 10px 12px;
   border: 2px solid  #ffffff;

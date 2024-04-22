@@ -1,16 +1,31 @@
-
 import { useQuery } from "react-query";
-import { getDataBasket , deleteBasket } from "../api";
+import { getDataBasket, deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
-
+import { useState } from "react";
 
 const ElementBasket = ({ productBasket }) => {
+  const [isPurchased, setIsPurchased] = useState(false);
+
+  const generateReceipt = (product) => {
+    const receiptContent = `Чек: \nНазвание: ${product.product.name}\nЦена: ${product.product.price} руб\n`;
+
+    // Создание и скачивание файла
+    const element = document.createElement("a");
+    const file = new Blob([receiptContent], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "receipt.txt";
+    document.body.appendChild(element);
+    element.click();
+
+    setIsPurchased(true);
+  };
+
   const queryClient = useQueryClient();
 
-  const deleteBasketId = () => deleteBasket(productBasket)
+  const deleteBasketId = () => deleteBasket(productBasket);
 
   const mutation = useMutation(deleteBasketId, {
-    onSuccess: () => { 
+    onSuccess: () => {
       queryClient.refetchQueries("productBasket");
     },
   });
@@ -20,11 +35,14 @@ const ElementBasket = ({ productBasket }) => {
       <h3>{productBasket.product.name}</h3>
       <img src={productBasket.product.image} />
       <p>{productBasket.product.price} руб</p>
+      <div className={isPurchased ? "purchased" : "not-purchased"}>
+        <h3>{isPurchased ? "Товар приобретён" : "Не куплен"}</h3>
+      </div>
       <button onClick={mutation.mutate} className="bay">
-      <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark"></i>
       </button>
-      <button className="bay3">
-     Купить
+      <button onClick={() => generateReceipt(productBasket)} className="bay3">
+        Купить
       </button>
     </div>
   );
@@ -38,11 +56,11 @@ export const Basket = () => {
         <h1>Корзина</h1>
       </div>
       <div className="containerProducts">
-      {(query.data || []).map((productBasket) => (
-        <ElementBasket key={productBasket.id} productBasket={productBasket} />
-      ))}
+        {(query.data || []).map((productBasket) => (
+          <ElementBasket key={productBasket.id} productBasket={productBasket} />
+        ))}
       </div>
-      <div/>
+      <div />
     </div>
   );
 };
