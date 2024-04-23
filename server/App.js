@@ -35,7 +35,7 @@ app.get("/product", async function (req, res) {
 //- GET /product: Возвращает все продукты с информацией о размере, цвете и категории и выводит их в фомате json на порте 8081.
 
 
-app.get("/cartProduct", async function (req, res) {
+app.get("/cartProduct",  async function (req, res) {
   const result = await CartProduct.findAll({ include: [Product] });
   res.send(result);
 });
@@ -71,16 +71,17 @@ console.log(token);
 })
 
 
-app.delete("/cartProduct/:id" , async function(req , res){
+app.delete("/cartProduct/:id" ,  async function(req , res){
  await CartProduct.destroy({
   where:{
     id: req.params.id
   }
 })
-res.end()
+
+res.status(204).send();
 });// - DELETE /cartProduct/:id: Удаляет продукт из корзины по его идентификатору.
 
-app.post("/carts", async function (req, res) {
+app.post("/carts",   async function (req, res) {
   const product = await Product.findOne({ where: { id: req.body.id } });
 
   await CartProduct.create(
@@ -102,11 +103,8 @@ app.post('/registration',async (req, res) => {
 await  User.create(
   { name, surname, email, password }
 );
-res.end()
+res.status(201).send()
 });
-
-
-
 
 
 app.listen(port, () => {  //Устанавливается прослушивание порта 8081 с помощью метода app.listen().

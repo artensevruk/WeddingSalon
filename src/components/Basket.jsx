@@ -23,7 +23,7 @@ const ElementBasket = ({ productBasket }) => {
       <button onClick={mutation.mutate} className="bay">
       <i class="fa-solid fa-xmark"></i>
       </button>
-      <button className="bay3">
+      <button  className="bay3">
      Купить
       </button>
     </div>
