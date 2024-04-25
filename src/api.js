@@ -17,6 +17,7 @@ export const deleteBasket = (productBasket) => {
 export const entranceData = async (data) => {
   const result =  await fetchData(`entrance` , "POST" , data)
   localStorage.setItem("jwtToken", result.token);
+  console.log("Вы успешно зарегестрировались!") 
 };
 
 export const regestrationData = (data) => {
@@ -39,10 +40,10 @@ function fetchData(url, method, data) {
   const reqWithJwt = addJwtToRequest(options);
   return fetch(apiUrl, reqWithJwt)
     .then((response) => {
-      if(response.status == 201){
+      if(response.status == 201){ //Created  - 201
         return null
       }
-      if(response.status == 204){
+      if(response.status == 204){ //NO content - 204
         return null
       }
       if (!response.ok) {
