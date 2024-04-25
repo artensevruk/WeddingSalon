@@ -17,7 +17,7 @@ export const deleteBasket = (productBasket) => {
 export const entranceData = async (data) => {
   const result =  await fetchData(`entrance` , "POST" , data)
   localStorage.setItem("jwtToken", result.token);
-  console.log("Вы успешно зарегестрировались!") 
+  alert("Вы успешно вошли!") 
 };
 
 export const regestrationData = (data) => {
