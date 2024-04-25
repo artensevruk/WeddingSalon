@@ -1,59 +1,74 @@
-export const getData = async () =>{
-  const response  = await fetch('http://localhost:8081/product')//Поступает запрос от клиента
-  return response.json()
- }
-
-
- export const getDataBasket = async () =>{
-  const response  = await fetch('http://localhost:8081/cartProduct')
-  return response.json()
- }
-
-export  const addBasket = (product) => {
-  fetch("http://localhost:8081/carts", {
-    method: "POST", // Здесь так же могут быть GET, PUT, DELETE
-    body: JSON.stringify(product), // Тело запроса в JSON-формате
-    headers: {
-      // Добавляем необходимые заголовки
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  }).then(() => console.log("Hello"));
+export const getData = async () => {
+  return fetchData("product" , "GET");
 };
 
+export const getDataBasket = async () => {
+  return fetchData("cartProduct" , "GET");
+};
 
-
+export const addBasket = (product) => {
+  return fetchData("carts" , "POST" , product);
+};
 
 export const deleteBasket = (productBasket) => {
-  return fetch(`http://localhost:8081/cartProduct/${productBasket.id}`, {
-    method: "DELETE", // Здесь так же могут быть GET, PUT, DELETE
-    headers: {
-      // Добавляем необходимые заголовки
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  return fetchData(`cartProduct/${productBasket.id}` , "DELETE");
 };
 
-export const entranceData =(data) =>{
-fetch('http://localhost:8081/entrance', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+export const entranceData = async (data) => {
+  const result =  await fetchData(`entrance` , "POST" , data)
+  localStorage.setItem("jwtToken", result.token);
+  alert("Вы успешно вошли!") 
+};
+
+export const regestrationData = (data) => {
+  return fetchData("registration" , "POST" , data);
+};
+
+function fetchData(url, method, data) {
+  const apiUrl = `http://localhost:8081/${url}`;
+
+  const options = {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  if (data) {
+    options.body = JSON.stringify(data);
+  }
+  const reqWithJwt = addJwtToRequest(options);
+  return fetch(apiUrl, reqWithJwt)
+    .then((response) => {
+      if(response.status == 201){ //Created  - 201
+        return null
+      }
+      if(response.status == 204){ //NO content - 204
+        return null
+      }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
     })
-    .then(result => console.log(result))
-    .catch(error => console.error(error));
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+}
+
+function addJwtToRequest(req) {
+  const token = localStorage.getItem("jwtToken");
+
+  if (token) {
+    return {
+      ...req,
+      headers: {
+        ...req.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    };
   }
 
-  export const regestrationData = (data) =>{
-  fetch('http://localhost:8081/registration', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  })
-      .then(result => console.log(result))
-      .catch(error => console.error(error));
-      console.log(data)
+  return req;
 }
