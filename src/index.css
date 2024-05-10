@@ -47,9 +47,63 @@ body {
 .entrance{
   text-align: center;
 }
+.slide-out {
+  animation: slideOut 0.5s forwards;
+}
 
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
 
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.slider{
+  text-align: center;
+  margin: 50px;
+  position: relative;
+  overflow: hidden;
+}
+.buttonsNavigation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.navigation{
+  cursor: pointer;
+}
+.newCollection{
+  background-color: #d73cbb;
+  color: white;
+  animation:newCollection 2s ease infinite;
+  border-radius: 20px;
+}
+@keyframes newCollection {
+  0%{
+    color: white;
+    background-color: #d73cbb;
+  }
+  36%{
+    background-color: #ffffff;
+    color: black;
+  }
+}
 .purchased {
   border: 2px solid green;
   padding: 10px;

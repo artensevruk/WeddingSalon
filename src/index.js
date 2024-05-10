@@ -11,6 +11,7 @@ import { Entrance } from './components/Entrance';
 import { Basket } from './components/Basket';
 import { SortCatalog } from './components/SortCatalog';
 import { Video } from './components/Video';
+import { SliderMenu } from './components/Slider';
 
 
   const router = createBrowserRouter(
@@ -33,7 +34,7 @@ import { Video } from './components/Video';
         },
           {
             path: "home",
-            element: <> <Logo /><SortCatalog /><Video /><Catalog /> </> 
+            element: <> <Logo /><SliderMenu /><SortCatalog /><Catalog /> </> 
           },
         ],
       },
