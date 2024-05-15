@@ -33,7 +33,7 @@ import { SliderMenu } from './components/Slider';
           element: <Basket />
         },
           {
-            path: "home",
+            path: "home/:categoryId?",
             element: <> <Logo /><SliderMenu /><SortCatalog /><Catalog /> </> 
           },
         ],

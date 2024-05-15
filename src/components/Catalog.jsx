@@ -1,6 +1,6 @@
 import { getData  , addBasket } from "../api";
 import { useQuery } from "react-query";
-
+import { useParams } from "react-router-dom";
 
 
 const ElementCatalog = ({ product }) => {
@@ -11,8 +11,7 @@ const ElementCatalog = ({ product }) => {
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
-      <img src={product.image} />
-      <p>{product.categories.map((element) => element.categories)}</p>
+      <img src={`/${product.image}`} />
       <p>
         <select className="select">
           {product.sizes.map((element) => (
@@ -42,7 +41,9 @@ const ElementCatalog = ({ product }) => {
 };
 
 export const Catalog = () => {
-  const query = useQuery("product", getData);
+  const params = useParams();
+  console.log(params.categoryId)
+  const query = useQuery(["product", params.categoryId], () => getData(params.categoryId));
   return (
     <div className="catalogContainer">
       {(query.data || []).map((product) => (

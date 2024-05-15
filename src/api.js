@@ -1,5 +1,9 @@
-export const getData = async () => {
-  return fetchData("product" , "GET");
+export const getData = async (categoryId) => {
+  console.log(categoryId)
+    return fetchData(categoryId ? `product?categoryId=${categoryId}` : 'product' , "GET");
+};
+export const getDataCategories = async () => {
+ return fetchData("categories" ,  "GET")
 };
 
 export const getDataBasket = async () => {

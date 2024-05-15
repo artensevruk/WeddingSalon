@@ -62,17 +62,26 @@ function authenticateJWT(req, res, next) {
 
 
 app.get("/product", async function (req, res) { 
-  const result = await Product.findAll({ include: [Size , Color , Categories]  });
+
+  const query =  req.query.categoryId ? { where : {categoryId : req.query.categoryId }, include: [Size , Color ]  } : {include: [Size , Color ]}
+  const result =  await Product.findAll(query);
   res.send(result);
 });
 //Объявляются роуты:
 //- GET /product: Возвращает все продукты с информацией о размере, цвете и категории и выводит их в фомате json на порте 8081.
+
+app.get("/categories", async function (req, res) { 
+  const result = await Categories.findAll();
+  res.send(result);
+});
 
 
 app.get("/cartProduct", authenticateJWT ,   async function (req, res) {
   const result = await CartProduct.findAll({ include: [Product] });
   res.send(result);
 });
+
+
 
 app.get("/registration", async function (req, res) {
   const users = await User.findAll();
