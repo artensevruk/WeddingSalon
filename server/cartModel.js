@@ -22,3 +22,11 @@ export const CartProduct = sequelize.define('cartProduct', {
 
 CartProduct.belongsTo(Product)
 
+// await CartProduct.sync();
+
+// await CartProduct.bulkCreate([
+//   {   
+//     quantity: 1,
+//     productId: 27
+// }
+// ]);

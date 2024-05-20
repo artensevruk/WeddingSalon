@@ -26,6 +26,13 @@ body {
   justify-content: center;
   font-size: calc(4px + 9 * (100vw / 1500));
 }
+.totalPrise span{
+  color: #d73cbb;
+}
+.totalPrise{
+  color: white;
+  font-size:calc(4px + 25 * (100vw / 1500)) ;
+}
 
 .information2{
   display: flex;
@@ -33,6 +40,24 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(4px + 17 * (100vw / 1500));
+}
+.sortPrise{
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 20px;
+}
+.sortPrise button{
+  background-color: black;
+  color:#ffffff;
+  padding: 10px;
+  font-family:"Satisfy", cursive; 
+  border: #ffffff;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: calc(4px + 14 * (100vw / 1500));
 }
 .inf p{
   margin: 0px;

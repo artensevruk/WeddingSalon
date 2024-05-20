@@ -32,8 +32,8 @@ const ElementSlider = ({ products }) => {
       <h2 className="newCollection">Новая колекция</h2>
       <div className={`sliderPosition ${isSliding ? 'slide-out' : 'slide-in'}`}>
         <h3>{products[currentSlide].name}</h3>
-        <img src={products[currentSlide].image} />
-        <p>{products[currentSlide].categories.map((element) => element.categories)}</p>
+        <img src={`/${products[currentSlide].image}`} />
+        
         <p>
           <select className="select">
             {products[currentSlide].sizes.map((element) => (
@@ -51,17 +51,17 @@ const ElementSlider = ({ products }) => {
         <p>{products[currentSlide].price} руб</p>
       </div>
       <div className="buttonsNavigation">
-        <img className="navigation" onClick={prevSlide} src="image/arowLeft.png" alt="Previous"></img>
+        <img className="navigation" onClick={prevSlide} src="/image/arowLeft.png" alt="Previous"></img>
         <button onClick={() => addBasketProducts(products[currentSlide])} className="bay2">
           Добавить в корзину
         </button>
-        <img className="navigation" onClick={nextSlide} src="image/arow.png" alt="Next"></img>
+        <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
       </div>
     </div>
   );
 };
 export const SliderMenu = () => {
-  const query = useQuery("product", getData);
+  const query = useQuery("product",() => getData());
   
   return (
     <div className="sliderContainer">

@@ -62,23 +62,32 @@ function authenticateJWT(req, res, next) {
 
 
 app.get("/product", async function (req, res) { 
-  const result = await Product.findAll({ include: [Size , Color , Categories]  });
+
+  const query =  req.query.categoryId ? { where : {categoryId : req.query.categoryId }, include: [Size , Color ]  } : {include: [Size , Color ]}
+  const result =  await Product.findAll(query);
   res.send(result);
 });
 //Объявляются роуты:
 //- GET /product: Возвращает все продукты с информацией о размере, цвете и категории и выводит их в фомате json на порте 8081.
 
+app.get("/categories", async function (req, res) { 
+  const result = await Categories.findAll();
+  res.send(result);
+});
+
 
 app.get("/cartProduct", authenticateJWT ,   async function (req, res) {
   const result = await CartProduct.findAll({ include: [Product] });
   res.send(result);
-});
+});// GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
+
+
 
 app.get("/registration", async function (req, res) {
   const users = await User.findAll();
   res.send(users);
 });
-// GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
+
 
 app.post("/entrance" , async function (req , res) { //req - запрос res - ответ 
   const { email, password } = req.body; // Получение введенных данных из запроса
@@ -117,7 +126,7 @@ res.status(204).send();
 
 app.post("/carts",   authenticateJWT ,   async function (req, res) {
   const product = await Product.findOne({ where: { id: req.body.id } });
-
+console.log("Hello" + req.body.id)
   await CartProduct.create(
     { quantity: 1, productId: req.body.id  }
   );

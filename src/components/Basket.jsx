@@ -2,8 +2,8 @@ import { useQuery } from "react-query";
 import { getDataBasket, deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
-
-const ElementBasket = ({ productBasket }) => {
+import { useEffect } from "react";
+const ElementBasket = ({ productBasket , updateTotalPrice }) => {
   const [isPurchased, setIsPurchased] = useState(false);
 
   const generateReceipt = (product) => {
@@ -27,6 +27,7 @@ const ElementBasket = ({ productBasket }) => {
   const mutation = useMutation(deleteBasketId, {
     onSuccess: () => {
       queryClient.refetchQueries("productBasket");
+      updateTotalPrice();
     },
   });
 
@@ -50,10 +51,22 @@ const ElementBasket = ({ productBasket }) => {
 
 export const Basket = () => {
   const query = useQuery("productBasket", getDataBasket);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const updateTotalPrice = () => {
+    const total = (query.data || []).reduce((acc, product) =>  parseInt(acc) +  parseInt(product.product.price), 0);
+    console.log("Hello" + typeof total )
+    setTotalPrice(total);
+  };
+
+  useEffect(() => {
+    updateTotalPrice();
+  }, [query.data]);
+
   return (
     <div className="basketContainer">
       <div className="title">
         <h1>Корзина</h1>
+        <p className="totalPrise">Общая сумма: <span>{totalPrice} руб</span></p>
       </div>
       <div className="containerProducts">
         {(query.data || []).map((productBasket) => (
