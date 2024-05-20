@@ -79,7 +79,7 @@ app.get("/categories", async function (req, res) {
 app.get("/cartProduct", authenticateJWT ,   async function (req, res) {
   const result = await CartProduct.findAll({ include: [Product] });
   res.send(result);
-});
+});// GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
 
 
 
@@ -87,7 +87,7 @@ app.get("/registration", async function (req, res) {
   const users = await User.findAll();
   res.send(users);
 });
-// GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
+
 
 app.post("/entrance" , async function (req , res) { //req - запрос res - ответ 
   const { email, password } = req.body; // Получение введенных данных из запроса
@@ -126,7 +126,7 @@ res.status(204).send();
 
 app.post("/carts",   authenticateJWT ,   async function (req, res) {
   const product = await Product.findOne({ where: { id: req.body.id } });
-
+console.log("Hello" + req.body.id)
   await CartProduct.create(
     { quantity: 1, productId: req.body.id  }
   );
