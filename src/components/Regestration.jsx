@@ -8,7 +8,7 @@ export const Registration = () =>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+alert("Вы успешно зарегистрировались")
     const formData = new FormData(e.target);
     const data = {
       name: formData.get('name'),
@@ -35,7 +35,7 @@ export const Registration = () =>{
         <input type="email"  name="email"  placeholder="ВВЕДИТЕ EMAIL" ></input>
         </div>
         <div className="bloc">
-        <input type="password" name="password" placeholder="ВВЕДИТЕ ПОРОЛЬ"></input>
+        <input type="password" name="password" placeholder="ВВЕДИТЕ ПАРОЛЬ"></input>
         </div>
         <NavLink to="/entrance">
       <p className="entranceToRegestration">

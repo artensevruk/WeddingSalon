@@ -57,6 +57,7 @@ const ElementSlider = ({ products }) => {
         </button>
         <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
       </div>
+      <h2 className="newCollection2">Каталог</h2>
     </div>
   );
 };
@@ -64,8 +65,11 @@ export const SliderMenu = () => {
   const query = useQuery("product",() => getData());
   
   return (
+    <div>
     <div className="sliderContainer">
       {query.data && <ElementSlider products={query.data} />}
+    </div>
+    
     </div>
   );
 };

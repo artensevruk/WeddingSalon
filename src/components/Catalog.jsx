@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 const ElementCatalog = ({ product }) => {
   const addBasketProducts = () => addBasket(product);
-
+  
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
@@ -39,6 +39,22 @@ const ElementCatalog = ({ product }) => {
 
 export const Catalog = () => {
   const params = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (query) {
+      const filteredProducts = sortedProducts.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchResults(filteredProducts);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   const query = useQuery(["product", params.categoryId], () =>
     getData(params.categoryId)
   );
@@ -54,34 +70,59 @@ export const Catalog = () => {
 
   const handleSortByAscending = () => {
     if (query.data) {
-      const sortedByPriceAsc = [...query.data].sort((a, b) => a.price - b.price);
+      const sortedByPriceAsc = [...query.data].sort(
+        (a, b) => a.price - b.price
+      );
       setSortedProducts(sortedByPriceAsc);
     }
   };
 
   const handleSortByDescending = () => {
     if (query.data) {
-      const sortedByPriceDesc = [...query.data].sort((a, b) => b.price - a.price);
+      const sortedByPriceDesc = [...query.data].sort(
+        (a, b) => b.price - a.price
+      );
       setSortedProducts(sortedByPriceDesc);
     }
   };
 
   return (
     <div>
-  <div className="sortPrise"> 
-  <button onClick={handleSortByAscending}>
-        от меньшей к большей
-      </button>
-      <button onClick={handleSortByDescending}>
-        от большей к меньшей
-      </button>
+      
+      <div className="FilterName">Фильтр</div>
+      <div className="sortPrice">
+        <select
+          className="filter"
+          onChange={(e) => {
+            if (e.target.value === "asc") {
+              handleSortByAscending();
+            } else if (e.target.value === "desc") {
+              handleSortByDescending();
+            }
+          }}
+        >
+          <option value="">Сортировка по цене</option>
+          <option value="asc">От меньшей к большей</option>
+          <option value="desc">От большей к меньшей</option>
+        </select>
       </div>
-    <div className="catalogContainer">
-     
-      {(sortedProducts || []).map((product) => (
-        <ElementCatalog product={product} />
-      ))}
-    </div>
+      <div>
+    
+</div>
+<div className="searchContainer">
+  <input
+    type="text"
+    className="search"
+    placeholder="Поиск по названию товара"
+    value={searchQuery}
+    onChange={handleSearch}
+  />
+  </div>
+      <div className="catalogContainer">
+      {(searchQuery ? searchResults : sortedProducts).map((product) => (
+    <ElementCatalog key={product.id} product={product} />
+  ))}
+      </div>
     </div>
   );
 };
