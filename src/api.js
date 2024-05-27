@@ -18,6 +18,10 @@ export const deleteBasket = (productBasket) => {
   return fetchData(`cartProduct/${productBasket.id}` , "DELETE");
 };
 
+export const user = () => {
+  return fetchData("currentUser" , "GET")
+}
+
 export const entranceData = async (data) => {
   const result =  await fetchData(`entrance` , "POST" , data)
   localStorage.setItem("jwtToken", result.token);

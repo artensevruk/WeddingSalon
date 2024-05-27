@@ -18,18 +18,13 @@ import jwt from "jsonwebtoken"
 // и функции из библиотеки @testing-library/react.
 
 const JwtSECRET = "1234578912";
-
 const port = 8081; 
 const app = express(); //Создается экземпляр приложения Express с помощью вызова функции express().
 app.use(cors()); //Добавляется middleware cors для обработки CORS (Cross-Origin Resource Sharing).
 app.use(express.json()); //Добавляется middleware express.json() для обработки JSON данных.
 
-
-
-
 function authenticateJWT(req, res, next) {
   const authHeader = req.headers.authorization;
-  
 
   if (authHeader) {
     const token = authHeader.split(" ")[1]; // Предполагается, что токен передается как "Bearer token"
@@ -59,8 +54,6 @@ function authenticateJWT(req, res, next) {
 }
 
 
-
-
 app.get("/product", async function (req, res) { 
 
   const query =  req.query.categoryId ? { where : {categoryId : req.query.categoryId }, include: [Size , Color ]  } : {include: [Size , Color ]}
@@ -77,16 +70,21 @@ app.get("/categories", async function (req, res) {
 
 
 app.get("/cartProduct", authenticateJWT ,   async function (req, res) {
-  const result = await CartProduct.findAll({ include: [Product] });
+  const user = req.user; 
+  const result = await CartProduct.findAll({where :{userId : user.id },  include: [Product] });
   res.send(result);
 });// GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
-
 
 
 app.get("/registration", async function (req, res) {
   const users = await User.findAll();
   res.send(users);
 });
+
+app.get("/currentUser" , authenticateJWT , function (req, res){
+  const user = req.user; // Получаем информацию о пользователе из объекта запроса
+  res.send(user); // Отправляем информацию о пользователе на фронтенд
+})
 
 
 app.post("/entrance" , async function (req , res) { //req - запрос res - ответ 
@@ -107,12 +105,9 @@ app.post("/entrance" , async function (req , res) { //req - запрос res - �
 } catch (error) {
   res.status(500).send({ error: 'Ошибка при выполнении запроса к базе данных' });
 }
-    
-
 console.log(token);
 
 })
-
 
 app.delete("/cartProduct/:id" , authenticateJWT ,  async function(req , res){
  await CartProduct.destroy({
@@ -125,15 +120,12 @@ res.status(204).send();
 });// - DELETE /cartProduct/:id: Удаляет продукт из корзины по его идентификатору.
 
 app.post("/carts",   authenticateJWT ,   async function (req, res) {
-  const product = await Product.findOne({ where: { id: req.body.id } });
-console.log("Hello" + req.body.id)
+  const user = req.user; 
   await CartProduct.create(
-    { quantity: 1, productId: req.body.id  }
+    {userId : user.id , quantity: 1, productId: req.body.id  }
   );
   res.status(201).send();
 });//- POST /carts: Добавляет продукт в корзину по идентификатору продукта.
-
-
 
 app.post('/registration',async (req, res) => {
   const { name, surname, email, password } = req.body;

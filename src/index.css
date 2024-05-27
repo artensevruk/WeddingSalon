@@ -113,7 +113,33 @@ body {
 .navigation{
   cursor: pointer;
 }
+.goOut{
+  background-color: #d73cbb;
+  color: white;
+  font-family: "Playfair Display";
+  animation:newCollection 2s ease infinite;
+  border-radius: 20px;
+}
 .newCollection{
+  background-color: #d73cbb;
+  color: white;
+  animation:newCollection 2s ease infinite;
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+.search{
+  padding: 10px 120px 10px 120px;
+background-color: #ffffff;
+border: 3px solid #d73cbb;
+border-radius: 30px;
+}
+.searchContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.newCollection2{
+  margin-top: 120px;
   background-color: #d73cbb;
   color: white;
   animation:newCollection 2s ease infinite;
@@ -377,21 +403,50 @@ cursor: pointer;
 .basket{
   text-align: center;
 }
-.sortCatalog{
-  padding: 10px 120px 10px 120px;
+.FilterName{
+  text-align: end;
+  margin-top: 60px;
+  font-family: "Playfair Display";
+  font-size: calc(8px + 19 * (100vw / 1500));
+  color: #da81ca;
 }
-.sortCatalog ul{
-align-items: center;
-justify-content: center;
-text-align: center;
-list-style-type: none;
+.sortPrice{
   display: flex;
-  font-size: calc(5px + 12 * (100vw / 1500));
- 
-  padding: 10px 0px 10px 0px;
- 
-  gap: 20%;
+  justify-content: end;
+  align-items: center;
+  margin-top: 20px;
 }
+.filter{
+  border-radius: 10px;
+  background-color: #d73cbb;
+  padding: 10px;
+  font-size: calc(2px + 8 * (100vw / 1500));
+  font-family: "Playfair Display";
+  border: 2px solid white;
+}
+.sortCatalog{
+  border-radius: 20px;
+  border: 2px solid white;
+  padding: 16px 30px;
+  background-color: #da81ca;
+}
+.sortCatalog span{
+  color: white;
+  text-decoration: none;
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+}
+
+.sortCatalog span:hover{
+  color: rgb(0, 0, 0);
+}
+.catalogContainer2{
+  display: flex;
+  gap: 210px;
+  justify-content: center;
+  align-items: center;
+}
+
 .containerProducts{
   display: flex;
   flex-wrap: wrap;
