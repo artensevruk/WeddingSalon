@@ -6,7 +6,7 @@ import "./colorModel.js";
 import "./colorModel.js";
 import  "./userModel.js";
 import  "./categoriesModel.js";
-
+import  "./subcategories.js";
 
 await sequelize.sync({alter:true})
 // await sequelize.sync({alter:true}) - это метод в библиотеке Sequelize, которая является ORM (Object-Relational Mapping) для Node.js, предназначенной для работы с базами данных. 

@@ -1,8 +1,10 @@
 import { getData, addBasket } from "../api";
 import { useQuery } from "react-query";
+import { isUserAuth } from "../utils";
 
 import React, { useState } from 'react';
-const ElementSlider = ({ products }) => {
+const ElementSlider = ({ products , isAuth  }) => {
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = products.length;
   const [isSliding, setIsSliding] = useState(false);
@@ -52,7 +54,7 @@ const ElementSlider = ({ products }) => {
       </div>
       <div className="buttonsNavigation">
         <img className="navigation" onClick={prevSlide} src="/image/arowLeft.png" alt="Previous"></img>
-        <button onClick={() => addBasketProducts(products[currentSlide])} className="bay2">
+        <button disabled={!isAuth} onClick={() => addBasketProducts(products[currentSlide])} className="bay2">
           Добавить в корзину
         </button>
         <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
@@ -67,7 +69,7 @@ export const SliderMenu = () => {
   return (
     <div>
     <div className="sliderContainer">
-      {query.data && <ElementSlider products={query.data} />}
+      {query.data && <ElementSlider isAuth ={isUserAuth()} products={query.data} />}
     </div>
     
     </div>

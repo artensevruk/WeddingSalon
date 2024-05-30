@@ -10,7 +10,6 @@ import { Logo } from './components/Logo';
 import { Entrance } from './components/Entrance';
 import { Basket } from './components/Basket';
 import { SortCatalog } from './components/SortCatalog';
-import { Video } from './components/Video';
 import { SliderMenu } from './components/Slider';
 
 
@@ -33,7 +32,7 @@ import { SliderMenu } from './components/Slider';
           element: <Basket />
         },
           {
-            path: "home/:categoryId?",
+            path: "home/:categoryId?/:subCategoryId?",
             element: <> <Logo /><SliderMenu /><SortCatalog /><Catalog /> </> 
           },
         ],

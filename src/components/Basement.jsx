@@ -2,6 +2,9 @@ export const Basement = () => {
   return (
     <div className="basement">
       <div className="basementContainer">
+      <div className="logoText">
+        <h1 className="firstText2">L'a</h1><h1 className="lastText2">Mour</h1>
+      </div>
       <div className="information2">
         <i class="calendar2 fa-solid fa-calendar-days"></i>
             <div className="inf">
@@ -34,6 +37,7 @@ export const Basement = () => {
                 <i className="fa-brands fa-telegram" />
               </a>
             </li>
+            <li></li>
           </ul>
         </div>
       </div>

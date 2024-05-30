@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { user } from "../api";
 import { useState , useQuery } from "react-query";
+import { isUserAuth } from "../utils";
+
 
 export const HeaderSite = () => {
-  const query = useQuery("user", user);
+  const query = useQuery("user", user , {enabled: isUserAuth() });
   const handleLogout = () => {
     // Удаление jwtToken из localStorage
     localStorage.removeItem("jwtToken");
@@ -35,7 +37,7 @@ export const HeaderSite = () => {
         <div className="information">
         <i class="calendar fa-solid fa-calendar-days"></i>
             <div className="inf">
-              <p>с 10.00 - 21.00 </p>
+              <p>10.00-21.00</p>
             </div>
           </div>
         </li>

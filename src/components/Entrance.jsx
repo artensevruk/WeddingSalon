@@ -1,12 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { entranceData } from "../api";
-
+ 
 
 export const Entrance = () => {
-
   const handleSubmit  = async (e) => {
     e.preventDefault();
-
+    
 
     const formData = new FormData(e.target);
     const data = {

@@ -2,8 +2,12 @@ import { getData, addBasket } from "../api";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { isUserAuth } from "../utils";
 
-const ElementCatalog = ({ product }) => {
+
+
+
+const ElementCatalog = ({ product , isAuth }) => {
   const addBasketProducts = () => addBasket(product);
   
   return (
@@ -30,7 +34,7 @@ const ElementCatalog = ({ product }) => {
       </p>
       <p>{product.price} руб</p>
 
-      <button onClick={addBasketProducts} className="bay2">
+      <button   disabled={!isAuth}  onClick={addBasketProducts} className="bay2">
         Добавить в корзину
       </button>
     </div>
@@ -41,6 +45,9 @@ export const Catalog = () => {
   const params = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+
+
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -55,8 +62,8 @@ export const Catalog = () => {
     }
   };
 
-  const query = useQuery(["product", params.categoryId], () =>
-    getData(params.categoryId)
+  const query = useQuery(["product", params], () =>
+    getData(params)
   );
   const [sortedProducts, setSortedProducts] = useState([]);
 
@@ -120,7 +127,7 @@ export const Catalog = () => {
   </div>
       <div className="catalogContainer">
       {(searchQuery ? searchResults : sortedProducts).map((product) => (
-    <ElementCatalog key={product.id} product={product} />
+    <ElementCatalog key={product.id} product={product} isAuth ={isUserAuth()} />
   ))}
       </div>
     </div>

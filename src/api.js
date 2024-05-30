@@ -1,35 +1,43 @@
-export const getData = async (categoryId) => {
-  console.log(categoryId)
-    return fetchData(categoryId ? `product?categoryId=${categoryId}` : 'product' , "GET");
+export const getData = async (params = {}) => {
+  console.log(params);
+  const queryParams = {};
+  if (params.subCategoryId) {
+    queryParams.subCategoryId = params.subCategoryId;
+  } else if (params.categoryId) {
+    queryParams.categoryId = params.categoryId;
+  }
+
+  return fetchData("product?" + new URLSearchParams(queryParams), "GET");
 };
+
 export const getDataCategories = async () => {
- return fetchData("categories" ,  "GET")
+  return fetchData("categories", "GET");
 };
 
 export const getDataBasket = async () => {
-  return fetchData("cartProduct" , "GET");
+  return fetchData("cartProduct", "GET");
 };
 
 export const addBasket = (product) => {
-  return fetchData("carts" , "POST" , product);
+  return fetchData("carts", "POST", product);
 };
 
 export const deleteBasket = (productBasket) => {
-  return fetchData(`cartProduct/${productBasket.id}` , "DELETE");
+  return fetchData(`cartProduct/${productBasket.id}`, "DELETE");
 };
 
 export const user = () => {
-  return fetchData("currentUser" , "GET")
-}
+  return fetchData("currentUser", "GET");
+};
 
 export const entranceData = async (data) => {
-  const result =  await fetchData(`entrance` , "POST" , data)
+  const result = await fetchData(`entrance`, "POST", data);
   localStorage.setItem("jwtToken", result.token);
-  alert("Вы успешно вошли!") 
+  alert("Вы успешно вошли!");
 };
 
 export const regestrationData = (data) => {
-  return fetchData("registration" , "POST" , data);
+  return fetchData("registration", "POST", data);
 };
 
 function fetchData(url, method, data) {
@@ -47,17 +55,28 @@ function fetchData(url, method, data) {
   }
   const reqWithJwt = addJwtToRequest(options);
   return fetch(apiUrl, reqWithJwt)
-    .then((response) => {
-      if(response.status == 201){ //Created  - 201
-        return null
+    .then(async (response) => {
+      let responseData;
+      if (response.status == 201) {
+        //Created  - 201
+        return null;
       }
-      if(response.status == 204){ //NO content - 204
-        return null
+      if (response.status == 204) {
+        //NO content - 204
+        return null;
       }
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const result = await response.json();
+        if (result.error) {
+          alert(result.error);
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      }else {
+        responseData = await response.json();
       }
-      return response.json();
+      return responseData;
+      
     })
     .catch((error) => {
       console.error("Error:", error);

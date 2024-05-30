@@ -8,7 +8,7 @@ export const Registration = () =>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-alert("Вы успешно зарегистрировались")
+
     const formData = new FormData(e.target);
     const data = {
       name: formData.get('name'),
