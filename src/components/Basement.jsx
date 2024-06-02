@@ -20,7 +20,7 @@ export const Basement = () => {
           </div>
         </div>
         <div className="Contact">
-          <h2>Соц-сети :</h2>
+          <h2>Мы в Сети:</h2>
           <ul>
             <li>
               <a href="https://www.instagram.com/shop_skidel_ts?igshid=OGQ5ZDc2ODk2ZA==">

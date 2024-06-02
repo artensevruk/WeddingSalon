@@ -10,6 +10,93 @@ body {
   font-family: "Playfair Display"
 }
 
+.aboutUs{
+  background-color: rgb(0, 0, 0);
+  color:#d73cbb ;
+  line-height: 1.6; 
+  border: 4px solid #d73cbb ;
+margin: 80px;
+font-family: "Varela Round", sans-serif;
+font-size: calc(5px + 13 * (100vw / 1500));
+border-radius: 20px;
+padding: 30px;
+animation: colorNext 2s ease infinite;
+box-shadow: 0 62px 34px rgba(224, 9, 185, 0.1);
+}
+
+@keyframes colorNext {
+  0%{
+    border: 4px solid rgb(255, 255, 255);
+  }
+  50%{
+    border: 4px solid #da81ca;
+  }
+  80%{
+    border: 4px solid #d73cbb;
+  }
+  100%{
+    border: 4px solid white;
+  }
+}
+.aboutUs li{
+  color:rgb(255, 255, 255) ;
+  transition: color 0.3s;
+}
+.aboutUs li:hover{
+  color: #da81ca;
+  cursor: pointer;
+}
+
+.logoText{
+  
+}
+
+.aboutUs ol li{
+  margin: 20px;
+}
+.scroll-button{
+  /* фиксированное позиционирование */
+  position: fixed;
+  /* цвет фона */
+  background-color:#d73cbb;
+  /* расстояние от правого края окна браузера */
+  right: 20px;
+  /* расстояние от нижнего края окна браузера */
+  bottom: 0;
+  border: 2px solid white;
+  /* скругление верхнего левого угла */
+  border-top-left-radius: 8px;
+  /* скругление верхнего правого угла */
+  border-top-right-radius: 8px;
+  /* вид курсора */
+  cursor: pointer;
+  /* отображение элемента как flex */
+  display: flex;
+  /* выравниваем элементы внутри элемента по центру вдоль поперечной оси */
+  align-items: center;
+  /* выравниваем элементы внутри элемента по центру вдоль главной оси */
+  justify-content: center;
+  /* ширина элемента */
+  width: 60px;
+  /* высота элемента */
+  height: 50px;
+}
+.scroll-button::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  background: transparent no-repeat center center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z'/%3E%3C/svg%3E");
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+  .scroll-button:hover {
+    background-color: #512da8; /* цвет заднего фона при наведении */
+  }
+}
+
 .menu {
   margin: 20px 100px 20px 100px;
   display: flex;
@@ -35,6 +122,7 @@ body {
 }
 
 .information2{
+  font-family: "Varela Round", sans-serif;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -365,6 +453,17 @@ font-size: calc(4px + 30 * (100vw / 1500));
 .firstText2 {
   -webkit-text-stroke: 1px white;
   color: #da81ca;
+  font-size: calc(8px + 40 * (100vw / 1500));
+  padding-right: 6px;
+}
+.lastText3 {
+  -webkit-text-stroke: 1px white;
+  animation: 1, 5s linear 0s infinite alternate love2;
+  font-size: calc(8px + 45 * (100vw / 1500));
+}
+.firstText3 {
+  -webkit-text-stroke: 1px white;
+  color: #fb08cf;
   font-size: calc(8px + 30 * (100vw / 1500));
   padding-right: 6px;
 }
@@ -396,6 +495,16 @@ cursor: pointer;
   }
   to {
     color: aliceblue;
+  }
+}
+
+@keyframes love2 {
+  from {
+    color: #ccdd14;
+    
+  }
+  to {
+    color: rgb(208, 24, 196);
   }
 }
 

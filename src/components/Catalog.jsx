@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { isUserAuth } from "../utils";
-
+import { ScrollButton } from "./btnUp";
 
 
 
@@ -95,7 +95,7 @@ export const Catalog = () => {
 
   return (
     <div>
-      
+      <ScrollButton  ></ScrollButton>
       <div className="FilterName">Фильтр</div>
       <div className="sortPrice">
         <select
