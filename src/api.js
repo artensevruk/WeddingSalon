@@ -18,10 +18,17 @@ export const getDataBasket = async () => {
   return fetchData("cartProduct", "GET");
 };
 
-export const addBasket = (product) => {
-  return fetchData("carts", "POST", product);
-};
+export const addBasket = (product, sizeId, colorId) => {
+  const body = {
+    productId: product.id,
+    sizeId: sizeId,
+    colorId: colorId,
+    quantity: 1,
+  };
+  console.log(body.colorId)
 
+  return fetchData("carts", "POST", body);
+};
 export const deleteBasket = (productBasket) => {
   return fetchData(`cartProduct/${productBasket.id}`, "DELETE");
 };

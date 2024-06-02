@@ -8,25 +8,29 @@ import { ScrollButton } from "./btnUp";
 
 
 const ElementCatalog = ({ product , isAuth }) => {
-  const addBasketProducts = () => addBasket(product);
   
+  const [sizeId, setSizeId] = useState(product.sizes[0].id);
+  const [colorId, setColorId] = useState(product.colors[0].id);
+  const addBasketProducts = () => addBasket(product , sizeId , colorId);
+
+
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
       <img src={`/${product.image}`} />
       <p>
-        <select className="select">
+        <select className="select" onChange={(e) => setSizeId(e.target.value)}>
           {product.sizes.map((element) => (
-            <option key={product.id} defaultValue={product.id}>
+            <option key={element.id} value={element.id}>
               {element.size}
             </option>
           ))}
         </select>
       </p>
       <p>
-        <select className="select">
+        <select className="select" onChange={(e) => setColorId(e.target.value)}>
           {product.colors.map((element) => (
-            <option key={product.id} defaultValue={product.id}>
+            <option key={element.id} value={element.id}>
               {element.color}
             </option>
           ))}
@@ -34,7 +38,7 @@ const ElementCatalog = ({ product , isAuth }) => {
       </p>
       <p>{product.price} руб</p>
 
-      <button   disabled={!isAuth}  onClick={addBasketProducts} className="bay2">
+      <button disabled={!isAuth} onClick={addBasketProducts} className="bay2">
         Добавить в корзину
       </button>
     </div>

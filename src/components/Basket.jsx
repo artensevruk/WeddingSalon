@@ -36,6 +36,8 @@ const ElementBasket = ({ productBasket , updateTotalPrice }) => {
       <h3>{productBasket.product.name}</h3>
       <img src={productBasket.product.image} />
       <p>{productBasket.product.price} руб</p>
+      <p>{productBasket.size.size} размер</p>
+      <p>{productBasket.color.color}</p>
       <div className={isPurchased ? "purchased" : "not-purchased"}>
         <h3>{isPurchased ? "Товар приобретён" : "Не куплен"}</h3>
       </div>

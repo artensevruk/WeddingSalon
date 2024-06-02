@@ -79,7 +79,7 @@ app.get("/cartProduct", authenticateJWT, async function (req, res) {
   const user = req.user;
   const result = await CartProduct.findAll({
     where: { userId: user.id },
-    include: [Product],
+    include: [Product ,Size, Color],
   });
   res.send(result);
 }); // GET /cartProduct: Возвращает все продукты в корзине с информацией о продукте.
@@ -126,10 +126,14 @@ app.delete("/cartProduct/:id", authenticateJWT, async function (req, res) {
 
 app.post("/carts", authenticateJWT, async function (req, res) {
   const user = req.user;
+  const { productId, sizeId, colorId } = req.body;
+
   await CartProduct.create({
     userId: user.id,
     quantity: 1,
-    productId: req.body.id,
+    productId,
+    sizeId,
+    colorId
   });
   res.status(201).send();
 }); //- POST /carts: Добавляет продукт в корзину по идентификатору продукта.
