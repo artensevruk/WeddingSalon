@@ -18,34 +18,17 @@ export const HeaderSite = () => {
       <ul className="menu">
         <li><NavLink to = "/home" ><i class="fa-solid fa-house"></i></NavLink></li>
         <li>
-          <div className="information">
-            <i class="local fa-solid fa-location-dot"></i>
-            <div className="inf">
-              <p>Ул. Советская 32</p>
-            </div>
-          </div>
-        </li>
-        <li>
-        <div className="information">
-          <i class="phone fa-solid fa-phone"></i>
-          <div className="inf">
-            <p>+3752945673</p>
-          </div>
-          </div>
-        </li>
-        <li>
-        <div className="information">
-        <i class="calendar fa-solid fa-calendar-days"></i>
-            <div className="inf">
-              <p>10.00-21.00</p>
-            </div>
-          </div>
-        </li>
+              <NavLink to="/catalog">
+                {" "}
+                <i class="fa-solid fa-cart-plus"></i>
+              </NavLink>
+            </li>
         <li>
         {
           query.data?  <NavLink to = "/basket" ><i class="basket fa-solid fa-basket-shopping"></i></NavLink> : null
         }
         </li>
+        
         <li>
           {
             query.data? query.data.name : <NavLink to = "/entrance" ><i className="fa-solid fa-user" /></NavLink>

@@ -59,7 +59,7 @@ const ElementSlider = ({ products , isAuth  }) => {
         </button>
         <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
       </div>
-      <h2 className="newCollection2">Каталог</h2>
+      
     </div>
   );
 };

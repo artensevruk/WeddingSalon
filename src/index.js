@@ -11,7 +11,7 @@ import { Entrance } from './components/Entrance';
 import { Basket } from './components/Basket';
 import { SortCatalog } from './components/SortCatalog';
 import { SliderMenu } from './components/Slider';
-
+import { HomePage } from './components/HomePage';
 
   const router = createBrowserRouter(
     [
@@ -27,13 +27,17 @@ import { SliderMenu } from './components/Slider';
             path: "registration",
             element: <Registration />,
           },
+          {
+            path: "catalog/:categoryId?/:subCategoryId?",
+            element: <><SortCatalog /><Catalog /></>
+          },
         {
           path: "basket",
           element: <Basket />
         },
           {
-            path: "home/:categoryId?/:subCategoryId?",
-            element: <> <Logo /><SliderMenu /><SortCatalog /><Catalog /> </> 
+            path: "home",
+            element: <> <Logo /><SliderMenu /><HomePage /> </> 
           },
         ],
       },
