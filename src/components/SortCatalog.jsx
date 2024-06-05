@@ -8,7 +8,7 @@ const Category = ({ category }) => {
   const navigate = useNavigate();
 
 const {subCategoryId} = useParams();
-console.log(subCategoryId)
+
   const handleSubCategoryChange = (subCategoryId) => {
     navigate(`/catalog/${category.id}/${subCategoryId}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
   };
@@ -19,13 +19,17 @@ console.log(subCategoryId)
         <NavLink to={`/catalog/${category.id}`}>
           <span>{category.categories}</span>
         </NavLink>
-        <select className="subCategory" value={subCategoryId} onChange={(e) => handleSubCategoryChange(e.target.value)}>
-          {category.subCategories.map((subCategory) => (
-            <option key={subCategory.id} value={subCategory.id}>
-              <NavLink to={`/catalog/${category.id}/${subCategory.id}`}>{subCategory.name}</NavLink>
-            </option>
-          ))}
-        </select>
+        {category.subCategories.length > 0 && ( // Проверяем наличие подкатегорий
+          <select className="subCategory" value={subCategoryId} onChange={(e) => handleSubCategoryChange(e.target.value)}>
+            {category.subCategories.map((subCategory) => (
+              subCategory.name && ( // Проверяем наличие текста в подкатегории
+                <option key={subCategory.id} value={subCategory.id}>
+                  <NavLink to={`/catalog/${category.id}/${subCategory.id}`}>{subCategory.name}</NavLink>
+                </option>
+              )
+            ))}
+          </select>
+        )}
       </div>
     </div>
   );

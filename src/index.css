@@ -122,6 +122,10 @@ box-shadow: 0 62px 34px rgba(224, 9, 185, 0.1);
   font-size: calc(8px + 40 * (100vw / 1500));
   color: white;
 }
+.productName{
+  width: 250px;
+  height: 450px;
+}
 .homePageContainer h2{
   font-size: calc(5px + 15 * (100vw / 1500));
   color:#d73cbb;
@@ -230,6 +234,17 @@ box-shadow: 0 62px 34px rgba(224, 9, 185, 0.1);
 }
 .navigation{
   cursor: pointer;
+  margin: 50px;
+}
+.navigationText{
+  color: white;
+  font-family: "Varela Round", sans-serif;
+  border: 2px solid;
+  background-color: #d73cbb;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: calc(4px + 15 * (100vw / 1500));
+
 }
 .goOut{
   background-color: #d73cbb;

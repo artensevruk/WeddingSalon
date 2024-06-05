@@ -20,7 +20,7 @@ export const HeaderSite = () => {
         <li>
               <NavLink to="/catalog">
                 {" "}
-                <i class="fa-solid fa-cart-plus"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
               </NavLink>
             </li>
         <li>

@@ -34,29 +34,13 @@ const ElementSlider = ({ products , isAuth  }) => {
       <h2 className="newCollection">Новая колекция</h2>
       <div className={`sliderPosition ${isSliding ? 'slide-out' : 'slide-in'}`}>
         <h3>{products[currentSlide].name}</h3>
-        <img src={`/${products[currentSlide].image}`} />
+        <img className="productName" src={`/${products[currentSlide].image}`} />
         
-        <p>
-          <select className="select">
-            {products[currentSlide].sizes.map((element) => (
-              <option key={element.size}>{element.size}</option>
-            ))}
-          </select>
-        </p>
-        <p>
-          <select className="select">
-            {products[currentSlide].colors.map((element) => (
-              <option key={element.color}>{element.color}</option>
-            ))}
-          </select>
-        </p>
-        <p>{products[currentSlide].price} руб</p>
+       
       </div>
       <div className="buttonsNavigation">
         <img className="navigation" onClick={prevSlide} src="/image/arowLeft.png" alt="Previous"></img>
-        <button disabled={!isAuth} onClick={() => addBasketProducts(products[currentSlide])} className="bay2">
-          Добавить в корзину
-        </button>
+       <p className="navigationText">Найди для себя свой идеал</p>
         <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
       </div>
       
