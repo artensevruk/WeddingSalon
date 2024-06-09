@@ -43,6 +43,11 @@ export const deleteBasket = (productBasket) => {
   return fetchData(`cartProduct/${productBasket.id}`, "DELETE");
 };
 
+
+export const deleteCatalog = (productCatalog) => {
+  return fetchData(`product/${productCatalog.id}`, "DELETE");
+};
+
 export const user =async () => {
   const data = await fetchData("currentUser", "GET")
   

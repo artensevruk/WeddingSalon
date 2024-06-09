@@ -83,12 +83,15 @@ app.post("/product/:id", async function (req, res){
 
 
 app.get("/product", async function (req, res) {
-  let query = { include: [Size, Color] };
+  let query = { include: [Size, Color] , where: {
+    // Добавить условие для поиска продуктов со статусом false
+    deleted: false,
+  }, };
 
   if (req.query.subCategoryId) {
-    query.where = { subCategoryId: req.query.subCategoryId };
+    query.where.subCategoryId =  req.query.subCategoryId ;
   } else if (req.query.categoryId) {
-    query.where = { categoryId: req.query.categoryId };
+    query.where.categoryId =  req.query.categoryId ;
   }
   const result = await Product.findAll(query);
   res.send(result);
@@ -151,6 +154,16 @@ app.delete("/cartProduct/:id", authenticateJWT, async function (req, res) {
 
   res.status(204).send();
 }); // - DELETE /cartProduct/:id: Удаляет продукт из корзины по его идентификатору.
+
+app.delete("/product/:id" , authenticateJWT , async function (req, res){
+  await Product.update({ deleted: true  } ,{
+    where: {
+      id: req.params.id,
+    },
+  })
+  res.status(204).send();
+})
+
 
 app.post("/carts", authenticateJWT, async function (req, res) {
   const user = req.user;

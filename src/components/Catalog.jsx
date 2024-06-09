@@ -6,8 +6,11 @@ import { isUserAuth } from "../utils";
 import { ScrollButton } from "./btnUp";
 import { user } from "../api";
 import { Select } from "./Select";
+import { deleteCatalog } from "../api";
+import { useMutation , useQueryClient } from "react-query";
 
-const ElementCatalog = ({ product , isAuth }) => {
+
+const ElementCatalog = ({ product , isAuth  , params }) => {
   const navigate = useNavigate();
   const [sizeId, setSizeId] = useState(product.sizes[0].id);
   const [colorId, setColorId] = useState(product.colors[0].id);
@@ -19,6 +22,16 @@ const ElementCatalog = ({ product , isAuth }) => {
     navigate(`/catalog/editproduct/${product.id}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
   
   };
+
+  const queryClient = useQueryClient();
+
+  const removingProduct = () => deleteCatalog(product);
+  const mutation = useMutation(removingProduct, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["product" , params]);
+    },
+  });
+
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
@@ -36,8 +49,9 @@ const ElementCatalog = ({ product , isAuth }) => {
       </button>
       
       {userData?.isAdmin && <button className="editing" onClick={handleSubCategoryChange}>Редактировать</button>}
-      
+      {userData?.isAdmin && <button className="editing" onClick={mutation.mutate}>Удалить товар из базы</button>}
     </div>
+    
   );
 };
 
@@ -128,7 +142,7 @@ export const Catalog = () => {
   </div>
       <div className="catalogContainer">
       {(searchQuery ? searchResults : sortedProducts).map((product) => (
-    <ElementCatalog key={product.id} product={product} isAuth ={isUserAuth()} />
+    <ElementCatalog key={product.id} params = {params} product={product} isAuth ={isUserAuth()} />
   ))}
       </div>
     </div>

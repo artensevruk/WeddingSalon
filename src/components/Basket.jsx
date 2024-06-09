@@ -30,7 +30,7 @@ const ElementBasket = ({ productBasket , updateTotalPrice }) => {
       updateTotalPrice();
     },
   });
-
+  
   return (
     <div className="basket">
       <h3>{productBasket.product.name}</h3>

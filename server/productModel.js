@@ -19,7 +19,13 @@ export const Product = sequelize.define('product', {
   image: {
     type: DataTypes.TEXT,
     allowNull: false
-  }
+  },
+  deleted: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: 0
+    }
+  
+
   
 }, {
   timestamps: false
