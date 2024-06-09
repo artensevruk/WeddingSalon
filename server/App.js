@@ -15,6 +15,7 @@ import { User } from "./userModel.js";
 import { Categories } from "./categoriesModel.js";
 import { sequelize } from "./connectDatabase.js";
 import jwt from "jsonwebtoken";
+
 //Импортируются необходимые модули express, cors, модели (Product, CartProduct, Size, Color, Categories)
 // и функции из библиотеки @testing-library/react.
 
@@ -53,6 +54,33 @@ function authenticateJWT(req, res, next) {
     res.status(401).json({ message: "Отсутствует заголовок Authorization" });
   }
 }
+
+app.get("/product/:id" , async function (req, res){
+  const { id } = req.params;
+ const result =  await Product.findOne({
+  where: { id : id},
+})
+res.send(result);
+})
+
+app.post("/product/:id", async function (req, res){
+  const { name ,  image , price  , categoryId , subCategoryId } = req.body;
+  
+
+  const { id } = req.params;
+
+  const result = await Product.update({ name: name , image:image ,price:price ,categoryId:categoryId   }, {
+    where: {
+      id: id //  идентификатор продукта, который вы хотите обновить
+    },
+    returning: true
+
+  });
+ //toDo ------------- ;)
+  // Отправьте ответ клиенту
+  res.send(result)
+})
+
 
 app.get("/product", async function (req, res) {
   let query = { include: [Size, Color] };
@@ -139,14 +167,15 @@ app.post("/carts", authenticateJWT, async function (req, res) {
 }); //- POST /carts: Добавляет продукт в корзину по идентификатору продукта.
 
 app.post("/registration", async (req, res) => {
+  
   try {
+    
     const { name, surname, email, password } = req.body;
 
-    // Проверка наличия пользователя в базе данных
-    const existingUser = await User.findOne({ email });
+    // Проверка наличия пользователя в базе данныхф
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      
-      
+      return res.status(409).send({ error: 'Пользователь с таким email уже существует' });
     }
 
     // Если пользователя нет, регистрируем его

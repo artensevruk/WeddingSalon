@@ -415,6 +415,17 @@ border-radius: 30px;
   border: 2px solid white;
   background-color: #da81ca;
 }
+.editing{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 30px 16px 30px;
+  border-radius: 20px;
+  border: 2px solid rgb(229, 226, 226);
+  background-color: #c00808;
+}
 .entranceToRegestration{
   font-size: 10px;
   color: white;
@@ -432,6 +443,16 @@ border-radius: 30px;
   border: 2px solid white;
   border-radius: 20px;
 }
+.editingPlatform h1{
+  margin-bottom: 50px;
+  color: white;
+}
+.editingPanel input{
+padding: 10px 100px 10px 100px;
+text-align: center;
+margin: 10px;
+border-radius: 10px;
+}
 .select{
   background: #da81ca;
   padding: 8px;
@@ -442,6 +463,16 @@ border-radius: 30px;
   color: #da81ca;
   background-color: white;
   cursor: pointer;
+}
+.editing:hover{
+  color: #d21010;
+  background-color: white;
+
+  cursor: pointer;
+}
+.editingPlatform{
+  margin-top: 100px;
+  text-align: center;
 }
 .bay:hover{
   color: #da81ca;
@@ -462,6 +493,22 @@ border-radius: 30px;
 .weddingSalon{
   font-family:"Satisfy", cursive; 
   color: white;
+  font-size: calc(4px + 17 * (100vw / 1500));
+  animation: shadow2 2s ease infinite;
+}
+.weddingSalon2{
+  font-size: calc(4px + 10 * (100vw / 1500));
+  font-family:"Satisfy", cursive; 
+  color: white;
+  animation: shadow2 2s ease infinite;
+}
+@keyframes shadow2 {
+  50% {
+    -webkit-text-stroke: 0.1px rgb(185, 11, 145);
+  }
+  80% {
+    color:#d73cbb ;
+  }
 }
 .socialNetwork{
   display: flex;

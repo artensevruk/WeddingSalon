@@ -1,46 +1,42 @@
 import { getData, addBasket } from "../api";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { isUserAuth } from "../utils";
 import { ScrollButton } from "./btnUp";
-
-
+import { user } from "../api";
+import { Select } from "./Select";
 
 const ElementCatalog = ({ product , isAuth }) => {
-  
+  const navigate = useNavigate();
   const [sizeId, setSizeId] = useState(product.sizes[0].id);
   const [colorId, setColorId] = useState(product.colors[0].id);
   const addBasketProducts = () => addBasket(product , sizeId , colorId);
 
-
+  const { data: userData } = useQuery('user', user);
+ 
+  const handleSubCategoryChange = () => {
+    navigate(`/catalog/editproduct/${product.id}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
+  
+  };
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
       <img src={`/${product.image}`} />
       <p>
-        <select className="select" onChange={(e) => setSizeId(e.target.value)}>
-          {product.sizes.map((element) => (
-            <option key={element.id} value={element.id}>
-              {element.size}
-            </option>
-          ))}
-        </select>
+      <Select onChange={setColorId}  items={product.sizes} name={"size"} />
       </p>
       <p>
-        <select className="select" onChange={(e) => setColorId(e.target.value)}>
-          {product.colors.map((element) => (
-            <option key={element.id} value={element.id}>
-              {element.color}
-            </option>
-          ))}
-        </select>
+        <Select onChange={setColorId}  items={product.colors} name={"color"} />
       </p>
       <p>{product.price} руб</p>
 
       <button disabled={!isAuth} onClick={addBasketProducts} className="bay2">
         Добавить в корзину
       </button>
+      
+      {userData?.isAdmin && <button className="editing" onClick={handleSubCategoryChange}>Редактировать</button>}
+      
     </div>
   );
 };

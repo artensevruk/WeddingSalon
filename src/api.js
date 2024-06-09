@@ -18,6 +18,16 @@ export const getDataBasket = async () => {
   return fetchData("cartProduct", "GET");
 };
 
+export const changeProduct = (data) =>{
+
+  return fetchData(`product/${data.id}`, "POST", data);
+}
+
+export const getProduct = async (id) =>{
+  return fetchData(`product/${id}` , "GET")
+}
+
+
 export const addBasket = (product, sizeId, colorId) => {
   const body = {
     productId: product.id,
@@ -33,8 +43,10 @@ export const deleteBasket = (productBasket) => {
   return fetchData(`cartProduct/${productBasket.id}`, "DELETE");
 };
 
-export const user = () => {
-  return fetchData("currentUser", "GET");
+export const user =async () => {
+  const data = await fetchData("currentUser", "GET")
+  
+  return data
 };
 
 export const entranceData = async (data) => {

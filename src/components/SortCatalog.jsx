@@ -9,6 +9,7 @@ const Category = ({ category }) => {
 
 const {subCategoryId} = useParams();
 
+
   const handleSubCategoryChange = (subCategoryId) => {
     navigate(`/catalog/${category.id}/${subCategoryId}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
   };

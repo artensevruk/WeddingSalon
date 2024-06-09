@@ -12,6 +12,7 @@ import { Basket } from './components/Basket';
 import { SortCatalog } from './components/SortCatalog';
 import { SliderMenu } from './components/Slider';
 import { HomePage } from './components/HomePage';
+import { EditProduct } from './components/EditPoduct';
 
   const router = createBrowserRouter(
     [
@@ -26,6 +27,10 @@ import { HomePage } from './components/HomePage';
           {
             path: "registration",
             element: <Registration />,
+          },
+          {
+            path: "catalog/editproduct/:productId?",
+            element: <><EditProduct /></>
           },
           {
             path: "catalog/:categoryId?/:subCategoryId?",
