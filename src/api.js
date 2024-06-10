@@ -19,7 +19,7 @@ export const getDataBasket = async () => {
 };
 
 export const changeProduct = (data) =>{
-
+console.log(data)
   return fetchData(`product/${data.id}`, "POST", data);
 }
 

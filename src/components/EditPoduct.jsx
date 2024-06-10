@@ -7,6 +7,11 @@ import { Select } from "./Select";
 
 export const EditProduct = () => {
   const { productId } = useParams();
+
+  // const {subCategoryId} = useParams();//новое
+
+
+
   const { data: product } = useQuery(["product", productId], () => getProduct(productId));
   
   const noop = () => {};
@@ -19,6 +24,7 @@ export const EditProduct = () => {
   const data = formDataToJson(formData)
   data.id = productId;
   changeProduct(data)
+  
  }
  const query = useQuery("categories", getDataCategories);
 console.log(product)
@@ -41,12 +47,13 @@ console.log(product)
           </div>
           <div className="editingPanel">
           <h2>Редактирование категории </h2>
-
-          <Select onChange={noop}  items={query.data || []} name={"categories"} />
+         <Select onChange={noop} value={product?.categoryId}  items={query.data || []}  name="categoryId"  displayKey="categories" />
           </div>
+         
           {/* <div className="editingPanel">
-          <h2>Редактирование подкатегория </h2>
-          <input placeholder="Подкатегория"  name="subCategoryId" defaultValue={product?.subCategoryId} />
+          <h2>Редактирование цвета </h2>
+         
+         <Select onChange={}  items={product.sizes} name={"size"} />
           </div> */}
          
           <button   className="editing">Изменить базу данных</button>

@@ -69,7 +69,7 @@ app.post("/product/:id", async function (req, res){
 
   const { id } = req.params;
 
-  const result = await Product.update({ name: name , image:image ,price:price ,categoryId:categoryId   }, {
+  const result = await Product.update({ name: name , image:image ,price:price ,categoryId:categoryId , subCategoryId:subCategoryId   }, {
     where: {
       id: id //  идентификатор продукта, который вы хотите обновить
     },

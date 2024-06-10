@@ -37,10 +37,11 @@ const ElementCatalog = ({ product , isAuth  , params }) => {
       <h3>{product.name}</h3>
       <img src={`/${product.image}`} />
       <p>
-      <Select onChange={setColorId}  items={product.sizes} name={"size"} />
+      <Select onChange={setSizeId}  items={product.sizes} name={"size"} displayKey="size" />
+      
       </p>
       <p>
-        <Select onChange={setColorId}  items={product.colors} name={"color"} />
+        <Select onChange={setColorId}  items={product.colors} name={"color"}  displayKey="color"/>
       </p>
       <p>{product.price} руб</p>
 
@@ -50,6 +51,7 @@ const ElementCatalog = ({ product , isAuth  , params }) => {
       
       {userData?.isAdmin && <button className="editing" onClick={handleSubCategoryChange}>Редактировать</button>}
       {userData?.isAdmin && <button className="editing" onClick={mutation.mutate}>Удалить товар из базы</button>}
+      
     </div>
     
   );
