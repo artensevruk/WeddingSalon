@@ -13,7 +13,7 @@ import { Size } from "./sizeModel.js";
 import { Color } from "./colorModel.js";
 import { User } from "./userModel.js";
 import { Categories } from "./categoriesModel.js";
-import { sequelize } from "./connectDatabase.js";
+import {Op} from "sequelize";
 import jwt from "jsonwebtoken";
 
 //Импортируются необходимые модули express, cors, модели (Product, CartProduct, Size, Color, Categories)
@@ -59,6 +59,7 @@ app.get("/product/:id" , async function (req, res){
   const { id } = req.params;
  const result =  await Product.findOne({
   where: { id : id},
+  include: [Size, Color]
 })
 res.send(result);
 })
@@ -109,7 +110,16 @@ app.get("/categories", async function (req, res) {
 app.get("/cartProduct", authenticateJWT, async function (req, res) {
   const user = req.user;
   const result = await CartProduct.findAll({
-    where: { userId: user.id },
+    where: { 
+      sizeId:{
+        [Op.not]: null
+      },
+      colorId:{
+        [Op.not]: null
+      },
+      userId: user.id
+
+     },
     include: [Product ,Size, Color],
   });
   res.send(result);
@@ -155,11 +165,47 @@ app.delete("/cartProduct/:id", authenticateJWT, async function (req, res) {
   res.status(204).send();
 }); // - DELETE /cartProduct/:id: Удаляет продукт из корзины по его идентификатору.
 
+app.delete("/product/color/:id" , authenticateJWT , async function (req, res){// удалить копипасту
+  await Color.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  res.status(204).send();
+})
+app.delete("/product/size/:id" , authenticateJWT , async function (req, res){
+  await Size.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  res.status(204).send();
+})
+
 app.delete("/product/:id" , authenticateJWT , async function (req, res){
   await Product.update({ deleted: true  } ,{
     where: {
       id: req.params.id,
     },
+  })
+  res.status(204).send();
+})
+
+app.post("/product/:id/color" , authenticateJWT , async function (req, res){ //два endpoint похожи нужно убрать дубликацию и сдлеать так чтбы извменялись только наименования
+  const { color } = req.body;
+ 
+  await Color.create({
+    color:color,
+    productId: req.params.id
+  })
+  res.status(204).send();
+})
+app.post("/product/:id/size" , authenticateJWT , async function (req, res){
+  const { size } = req.body;
+ 
+  await Size.create({
+    size:size,
+    productId: req.params.id
   })
   res.status(204).send();
 })

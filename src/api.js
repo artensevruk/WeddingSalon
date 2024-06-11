@@ -43,6 +43,16 @@ export const deleteBasket = (productBasket) => {
   return fetchData(`cartProduct/${productBasket.id}`, "DELETE");
 };
 
+export const deleteAttributes = (attributesId , displayKey) => {
+  return fetchData(`product/${displayKey}/${attributesId}`, "DELETE");
+};
+
+export const addAttributes = (productId , newAttribute , displayKey) => {
+  const body = {
+    [displayKey]: newAttribute,
+  }
+return fetchData(`product/${productId}/${displayKey}`, "POST"  , body);
+}
 
 export const deleteCatalog = (productCatalog) => {
   return fetchData(`product/${productCatalog.id}`, "DELETE");
@@ -50,7 +60,6 @@ export const deleteCatalog = (productCatalog) => {
 
 export const user =async () => {
   const data = await fetchData("currentUser", "GET")
-  
   return data
 };
 

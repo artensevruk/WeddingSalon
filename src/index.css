@@ -10,6 +10,11 @@ body {
   font-family: "Playfair Display"
 }
 
+.color i{
+  margin: 5px;
+  padding: 5px;
+}
+
 .aboutUs{
   background-color: rgb(0, 0, 0);
   color:#d73cbb ;
@@ -425,6 +430,46 @@ border-radius: 30px;
   border-radius: 20px;
   border: 2px solid rgb(229, 226, 226);
   background-color: #c00808;
+}
+
+.fillingForm{
+  text-align: center;
+  padding: 10px 50px 10px 50px;
+  margin: 5px;
+}
+
+.fillingFormButton{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 20px 16px 20px;
+  border-radius: 30px;
+  padding: 10px 17px 10px 17px;
+  border: 4px solid white;
+  background-color: #da81ca;
+}
+
+.productAdd{
+  margin-top: 40px;
+  text-align: center;
+}
+.editingAdd{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 30px 16px 30px;
+  border-radius: 20px;
+  border: 2px solid rgb(229, 226, 226);
+  background-color: #c00808;
+}
+.editingAdd:hover{
+  color: #d21010;
+  background-color: white;
+  cursor: pointer;
 }
 .entranceToRegestration{
   font-size: 10px;

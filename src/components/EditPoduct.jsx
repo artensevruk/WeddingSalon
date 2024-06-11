@@ -4,13 +4,13 @@ import { getProduct } from "../api";
 import { changeProduct } from "../api";
 import { getDataCategories} from "../api";
 import { Select } from "./Select";
+import { ProductAttributes } from "./ProductAttributes";
+
 
 export const EditProduct = () => {
   const { productId } = useParams();
 
   // const {subCategoryId} = useParams();//новое
-
-
 
   const { data: product } = useQuery(["product", productId], () => getProduct(productId));
   
@@ -19,15 +19,16 @@ export const EditProduct = () => {
   const formDataToJson = (formData) => Object.fromEntries(formData);
 
  const handleSubmit = (e) => {
+ 
   e.preventDefault();
   const formData = new FormData(e.target);
   const data = formDataToJson(formData)
   data.id = productId;
   changeProduct(data)
-  
+ 
  }
  const query = useQuery("categories", getDataCategories);
-console.log(product)
+
   return (
     <div className="editingPlatform">
       <h1>ПАНЕЛЬ АДМИНА</h1>
@@ -44,6 +45,10 @@ console.log(product)
           <div className="editingPanel">
           <h2>Редактирование цены </h2>
           <input placeholder="Цена" name="price" defaultValue={product?.price} />
+          </div>
+          <div>
+            <ProductAttributes productAttrs={product?.colors} displayKey="color" productId ={product?.id} />
+            <ProductAttributes productAttrs={product?.sizes} displayKey="size" productId ={product?.id} />
           </div>
           <div className="editingPanel">
           <h2>Редактирование категории </h2>

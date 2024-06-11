@@ -10,13 +10,14 @@ import { deleteCatalog } from "../api";
 import { useMutation , useQueryClient } from "react-query";
 
 
-const ElementCatalog = ({ product , isAuth  , params }) => {
+const ElementCatalog = ({ product , isAuth  , params ,userData }) => {
   const navigate = useNavigate();
   const [sizeId, setSizeId] = useState(product.sizes[0].id);
+ 
   const [colorId, setColorId] = useState(product.colors[0].id);
   const addBasketProducts = () => addBasket(product , sizeId , colorId);
 
-  const { data: userData } = useQuery('user', user);
+ 
  
   const handleSubCategoryChange = () => {
     navigate(`/catalog/editproduct/${product.id}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
@@ -32,23 +33,24 @@ const ElementCatalog = ({ product , isAuth  , params }) => {
     },
   });
 
+
   return (
     <div className="catalog">
       <h3>{product.name}</h3>
       <img src={`/${product.image}`} />
       <p>
-      <Select onChange={setSizeId}  items={product.sizes} name={"size"} displayKey="size" />
+      <Select onChange={setSizeId} value={sizeId}  items={product.sizes} name={"size"} displayKey="size" />
       
       </p>
       <p>
-        <Select onChange={setColorId}  items={product.colors} name={"color"}  displayKey="color"/>
+        <Select onChange={setColorId} value={colorId}  items={product.colors} name={"color"}  displayKey="color"/>
       </p>
       <p>{product.price} руб</p>
 
       <button disabled={!isAuth} onClick={addBasketProducts} className="bay2">
         Добавить в корзину
       </button>
-      
+     
       {userData?.isAdmin && <button className="editing" onClick={handleSubCategoryChange}>Редактировать</button>}
       {userData?.isAdmin && <button className="editing" onClick={mutation.mutate}>Удалить товар из базы</button>}
       
@@ -61,8 +63,8 @@ export const Catalog = () => {
   const params = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-
+  const { data: userData } = useQuery('user', user);
+  const making = () =>{}
 
 
   const handleSearch = (e) => {
@@ -112,6 +114,7 @@ export const Catalog = () => {
   return (
     <div>
       <hr></hr>
+      
       <ScrollButton  ></ScrollButton>
       <div className="FilterName">Фильтр</div>
       <div className="sortPrice">
@@ -142,9 +145,12 @@ export const Catalog = () => {
     onChange={handleSearch}
   />
   </div>
+  <div className="productAdd"> 
+  {userData?.isAdmin && <button className="editingAdd" onClick={making}>Добавить  новый товар</button>}
+  </div>
       <div className="catalogContainer">
       {(searchQuery ? searchResults : sortedProducts).map((product) => (
-    <ElementCatalog key={product.id} params = {params} product={product} isAuth ={isUserAuth()} />
+    <ElementCatalog key={product.id} params = {params} product={product} userData={userData} isAuth ={isUserAuth()} />
   ))}
       </div>
     </div>
