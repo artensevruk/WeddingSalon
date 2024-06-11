@@ -17,7 +17,11 @@ export const CartProduct = sequelize.define('cartProduct', {
     type: DataTypes.INTEGER,
     defaultValue: 1,
     allowNull: false
-  }
+  },
+  purchased: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: 0
+    }
 }, {
   timestamps: false,
 

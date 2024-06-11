@@ -3,7 +3,11 @@ import { getDataBasket, deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
 import { useEffect } from "react";
+import { purchasedProduct } from "../api";
+import { useParams } from "react-router-dom";
+
 const ElementBasket = ({ productBasket, updateTotalPrice }) => {
+  const params = useParams();
   const [isPurchased, setIsPurchased] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -37,11 +41,18 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
   const queryClient = useQueryClient();
 
   const deleteBasketId = () => deleteBasket(productBasket);
+const productPurchased = () => purchasedProduct(productBasket)
 
   const mutation = useMutation(deleteBasketId, {
     onSuccess: () => {
       queryClient.refetchQueries("productBasket");
       updateTotalPrice();
+    },
+  });
+
+  const mutationBasketProduct = useMutation(productPurchased, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["productBasket" , params]);
     },
   });
 
@@ -63,7 +74,7 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
         <div> <input className="fillingForm"  type="text" placeholder="Номер телефона" /></div>
        
           <button className="fillingFormButton" onClick={closeForm}>Отмена</button>
-          <button className="fillingFormButton" onClick={generateReceipt}>Подтвердить покупку</button>
+          <button className="fillingFormButton" onClick={mutationBasketProduct.mutate}>Подтвердить покупку</button>
        
         </div>
       )}
@@ -85,7 +96,6 @@ export const Basket = () => {
       (acc, product) => parseInt(acc) + parseInt(product.product.price),
       0
     );
-    console.log("Hello" + typeof total);
     setTotalPrice(total);
   };
 

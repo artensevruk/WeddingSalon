@@ -1,5 +1,4 @@
 export const getData = async (params = {}) => {
-  console.log(params);
   const queryParams = {};
   if (params.subCategoryId) {
     queryParams.subCategoryId = params.subCategoryId;
@@ -57,7 +56,10 @@ return fetchData(`product/${productId}/${displayKey}`, "POST"  , body);
 export const deleteCatalog = (productCatalog) => {
   return fetchData(`product/${productCatalog.id}`, "DELETE");
 };
-
+export const purchasedProduct = (productBasket) => {
+  console.log(productBasket)
+  return fetchData(`cartProduct/${productBasket.id}`, "POST");
+};
 export const user =async () => {
   const data = await fetchData("currentUser", "GET")
   return data

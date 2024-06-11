@@ -13,7 +13,7 @@ export const EditProduct = () => {
   // const {subCategoryId} = useParams();//новое
 
   const { data: product } = useQuery(["product", productId], () => getProduct(productId));
-  
+  console.log(product)
   const noop = () => {};
 
   const formDataToJson = (formData) => Object.fromEntries(formData);
@@ -52,6 +52,10 @@ export const EditProduct = () => {
           </div>
           <div className="editingPanel">
           <h2>Редактирование категории </h2>
+         <Select onChange={noop} value={product?.categoryId}  items={query.data || []}  name="categoryId"  displayKey="categories" />
+          </div>
+          <div className="editingPanel">
+          <h2>Редактирование подкатегории </h2>
          <Select onChange={noop} value={product?.categoryId}  items={query.data || []}  name="categoryId"  displayKey="categories" />
           </div>
          

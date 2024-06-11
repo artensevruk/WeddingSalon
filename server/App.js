@@ -191,6 +191,15 @@ app.delete("/product/:id" , authenticateJWT , async function (req, res){
   res.status(204).send();
 })
 
+app.post("/cartProduct/:id" , authenticateJWT , async function (req, res){
+  await CartProduct.update({ purchased: true  } ,{
+    where: {
+      id: req.params.id,
+    },
+  })
+  res.status(204).send();
+})
+
 app.post("/product/:id/color" , authenticateJWT , async function (req, res){ //два endpoint похожи нужно убрать дубликацию и сдлеать так чтбы извменялись только наименования
   const { color } = req.body;
  
