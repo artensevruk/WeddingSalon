@@ -9,6 +9,15 @@ export const getData = async (params = {}) => {
   return fetchData("product?" + new URLSearchParams(queryParams), "GET");
 };
 
+
+
+export const getSubCategories = (categoryId) =>{
+  console.log(categoryId)
+  return fetchData(`categories/${categoryId}/subCategories`, "GET");
+}
+
+
+
 export const getDataCategories = async () => {
   return fetchData("categories", "GET");
 };

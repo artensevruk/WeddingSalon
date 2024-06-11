@@ -55,11 +55,24 @@ function authenticateJWT(req, res, next) {
   }
 }
 
+
+
+
+app.get("/categories/:categoryId/subCategories" ,  async function (req, res){
+  const { categoryId } = req.params;
+  const result = await SubCategories.findAll({
+    where: {categoryId}
+  });
+  res.send(result);
+})
+
+
+
 app.get("/product/:id" , async function (req, res){
   const { id } = req.params;
  const result =  await Product.findOne({
   where: { id : id},
-  include: [Size, Color]
+  include: [Size, Color  , Categories ,SubCategories]
 })
 res.send(result);
 })

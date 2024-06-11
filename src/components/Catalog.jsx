@@ -1,27 +1,30 @@
 import { getData, addBasket } from "../api";
 import { useQuery } from "react-query";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { isUserAuth } from "../utils";
 import { ScrollButton } from "./btnUp";
 import { user } from "../api";
 import { Select } from "./Select";
 import { deleteCatalog } from "../api";
-import { useMutation , useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
-
-const ElementCatalog = ({ product , isAuth  , params ,userData }) => {
+const ElementCatalog = ({ product, isAuth, params, userData }) => {
   const navigate = useNavigate();
-  const [sizeId, setSizeId] = useState(product.sizes[0].id);
  
-  const [colorId, setColorId] = useState(product.colors[0].id);
-  const addBasketProducts = () => addBasket(product , sizeId , colorId);
+  const addBasketProducts = (e) => {
+    e.preventDefault();
 
- 
- 
+    const formData = new FormData(e.target);
+
+    const sizeId = formData.get("size");
+    const colorId = formData.get("color");
+
+    addBasket(product, sizeId, colorId);
+  };
+
   const handleSubCategoryChange = () => {
     navigate(`/catalog/editproduct/${product.id}`); // Перенаправляем пользователя на URL с информацией о выбранной подкатегории
-  
   };
 
   const queryClient = useQueryClient();
@@ -29,33 +32,48 @@ const ElementCatalog = ({ product , isAuth  , params ,userData }) => {
   const removingProduct = () => deleteCatalog(product);
   const mutation = useMutation(removingProduct, {
     onSuccess: () => {
-      queryClient.refetchQueries(["product" , params]);
+      queryClient.refetchQueries(["product", params]);
     },
   });
 
-
   return (
     <div className="catalog">
-      <h3>{product.name}</h3>
-      <img src={`/${product.image}`} />
-      <p>
-      <Select onChange={setSizeId} value={sizeId}  items={product.sizes} name={"size"} displayKey="size" />
-      
-      </p>
-      <p>
-        <Select onChange={setColorId} value={colorId}  items={product.colors} name={"color"}  displayKey="color"/>
-      </p>
-      <p>{product.price} руб</p>
+      <form onSubmit={addBasketProducts}>
+        <h3>{product.name}</h3>
+        <img src={`/${product.image}`} />
+        <p>
+          <Select
+           
+            items={product.sizes}
+            name={"size"}
+            displayKey="size"
+          />
+        </p>
+        <p>
+          <Select
+           
+            items={product.colors}
+            name={"color"}
+            displayKey="color"
+          />
+        </p>
+        <p>{product.price} руб</p>
 
-      <button disabled={!isAuth} onClick={addBasketProducts} className="bay2">
-        Добавить в корзину
-      </button>
-     
-      {userData?.isAdmin && <button className="editing" onClick={handleSubCategoryChange}>Редактировать</button>}
-      {userData?.isAdmin && <button className="editing" onClick={mutation.mutate}>Удалить товар из базы</button>}
-      
+        <button disabled={!isAuth} className="bay2">
+          Добавить в корзину
+        </button>
+      </form>
+      {userData?.isAdmin && (
+        <button className="editing" onClick={handleSubCategoryChange}>
+          Редактировать
+        </button>
+      )}
+      {userData?.isAdmin && (
+        <button className="editing" onClick={mutation.mutate}>
+          Удалить товар из базы
+        </button>
+      )}
     </div>
-    
   );
 };
 
@@ -63,9 +81,8 @@ export const Catalog = () => {
   const params = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { data: userData } = useQuery('user', user);
-  const making = () =>{}
-
+  const { data: userData } = useQuery("user", user);
+  const making = () => {};
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -80,9 +97,7 @@ export const Catalog = () => {
     }
   };
 
-  const query = useQuery(["product", params], () =>
-    getData(params)
-  );
+  const query = useQuery(["product", params], () => getData(params));
   const [sortedProducts, setSortedProducts] = useState([]);
 
   useEffect(() => {
@@ -114,8 +129,8 @@ export const Catalog = () => {
   return (
     <div>
       <hr></hr>
-      
-      <ScrollButton  ></ScrollButton>
+
+      <ScrollButton></ScrollButton>
       <div className="FilterName">Фильтр</div>
       <div className="sortPrice">
         <select
@@ -133,25 +148,33 @@ export const Catalog = () => {
           <option value="desc">От большей к меньшей</option>
         </select>
       </div>
-      <div>
-    
-</div>
-<div className="searchContainer">
-  <input
-    type="text"
-    className="search"
-    placeholder="Поиск по названию товара"
-    value={searchQuery}
-    onChange={handleSearch}
-  />
-  </div>
-  <div className="productAdd"> 
-  {userData?.isAdmin && <button className="editingAdd" onClick={making}>Добавить  новый товар</button>}
-  </div>
+      <div></div>
+      <div className="searchContainer">
+        <input
+          type="text"
+          className="search"
+          placeholder="Поиск по названию товара"
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </div>
+      <div className="productAdd">
+        {userData?.isAdmin && (
+          <button className="editingAdd" onClick={making}>
+            Добавить новый товар
+          </button>
+        )}
+      </div>
       <div className="catalogContainer">
-      {(searchQuery ? searchResults : sortedProducts).map((product) => (
-    <ElementCatalog key={product.id} params = {params} product={product} userData={userData} isAuth ={isUserAuth()} />
-  ))}
+        {(searchQuery ? searchResults : sortedProducts).map((product) => (
+          <ElementCatalog
+            key={product.id}
+            params={params}
+            product={product}
+            userData={userData}
+            isAuth={isUserAuth()}
+          />
+        ))}
       </div>
     </div>
   );
