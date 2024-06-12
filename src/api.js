@@ -11,6 +11,12 @@ export const getData = async (params = {}) => {
 
 
 
+
+
+
+
+
+
 export const getSubCategories = (categoryId) =>{
   console.log(categoryId)
   return fetchData(`categories/${categoryId}/subCategories`, "GET");
@@ -35,6 +41,11 @@ export const getProduct = async (id) =>{
   return fetchData(`product/${id}` , "GET")
 }
 
+
+export const addProduct = async (productData) => {
+  console.log(productData)
+  return fetchData("api/products", "POST", productData);
+};
 
 export const addBasket = (product, sizeId, colorId) => {
   const body = {

@@ -58,6 +58,26 @@ function authenticateJWT(req, res, next) {
 
 
 
+
+app.post('/api/products', (req, res) => {
+  const productData = req.body; // Получение данных о продукте из запроса
+
+  Product.create({
+    name: productData.name,
+    image: productData.image,
+    price: productData.price,
+    categoryId: productData.categoryId
+  })
+    .then(product => {
+      res.status(201).json({ message: "Product added successfully", product });
+    })
+    .catch(err => {
+      console.error('Ошибка при добавлении продукта:', err);
+      res.status(500).json({ error: "Failed to add product" });
+    });
+});
+
+
 app.get("/categories/:categoryId/subCategories" ,  async function (req, res){
   const { categoryId } = req.params;
   const result = await SubCategories.findAll({

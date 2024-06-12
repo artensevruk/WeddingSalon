@@ -13,6 +13,7 @@ import { SortCatalog } from './components/SortCatalog';
 import { SliderMenu } from './components/Slider';
 import { HomePage } from './components/HomePage';
 import { EditProduct } from './components/EditPoduct';
+import { AddProduct } from './components/AddProduct';
 
   const router = createBrowserRouter(
     [
@@ -31,6 +32,10 @@ import { EditProduct } from './components/EditPoduct';
           {
             path: "catalog/editproduct/:productId?",
             element: <><EditProduct /></>
+          },
+          {
+            path: "catalog/addProduct",
+            element: <><AddProduct /></>
           },
           {
             path: "catalog/:categoryId?/:subCategoryId?",

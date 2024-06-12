@@ -6,6 +6,8 @@ import { getDataCategories } from "../api";
 import { Select } from "./Select";
 import { ProductAttributes } from "./ProductAttributes";
 import { getSubCategories } from "../api";
+import { addAttributes } from "../api";
+import { deleteAttributes } from "../api";
 
 export const EditProduct = () => {
   const { productId } = useParams();
@@ -63,11 +65,15 @@ export const EditProduct = () => {
           </div>
           <div>
             <ProductAttributes
+              addAttributes ={(newAttribute , displayKey) => {addAttributes(productId , newAttribute , displayKey)}}
+              deleteAttributes={(productAttrId , displayKey) => {deleteAttributes( productAttrId ,displayKey  )}}
               productAttrs={product?.colors}
               displayKey="color"
               productId={product?.id}
             />
             <ProductAttributes
+              addAttributes ={(newAttribute , displayKey) => {addAttributes(productId , newAttribute , displayKey)}}
+              deleteAttributes={(productAttrId , displayKey) => {deleteAttributes( productAttrId ,displayKey  )}}
               productAttrs={product?.sizes}
               displayKey="size"
               productId={product?.id}

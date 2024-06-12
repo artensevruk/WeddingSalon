@@ -19,6 +19,43 @@ body {
   cursor: pointer;
 }
 
+.addingProductPlatform{
+  text-align: center;
+}
+
+.addProduct{
+  font-size: calc(5px + 50 * (100vw / 1500));
+  color: #fb08cf;
+}
+.deleteProduct{
+  font-size: calc(5px + 30 * (100vw / 1500));
+  color: #fb08cf;
+  margin: 25px;
+}
+.deleteProduct:hover{
+  color:white;
+  cursor: pointer;
+}
+.changeProduct{
+  font-size: calc(5px + 30 * (100vw / 1500));
+  color: #fb08cf;
+  margin: 25px;
+}
+.changeProduct:hover{
+  color:white;
+  cursor: pointer;
+}
+.addProductToDataBase{
+  font-family: "Playfair Display";
+  font-size: calc(3px + 12 * (100vw / 1500));
+  margin-top: 40px;
+  margin: 10px;
+  color: white;
+  padding: 16px 30px 16px 30px;
+  border-radius: 20px;
+  border: 2px solid rgb(229, 226, 226);
+  background-color: #c00808;
+}
 
 .aboutUs{
   background-color: rgb(0, 0, 0);

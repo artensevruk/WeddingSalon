@@ -3,12 +3,12 @@ import { deleteAttributes , addAttributes } from "../api";
 import React, { useState } from 'react';
 
 
-export const ProductAttributes = ({ productAttrs, productId , displayKey }) => {
+export const ProductAttributes = ({ productAttrs,  displayKey , deleteAttributes ,  addAttributes}) => {//productId уйдёт
   // Attributes = color or size\\
   const [newAttribute, setNewAttribute] = useState('');
 
   const handleAddAttribute = () => {
-    addAttributes(productId, newAttribute , displayKey);
+    addAttributes( newAttribute , displayKey);
     setNewAttribute(''); // Очистить поле ввода после добавления
   };
 

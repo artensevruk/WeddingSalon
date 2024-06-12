@@ -8,6 +8,7 @@ import { user } from "../api";
 import { Select } from "./Select";
 import { deleteCatalog } from "../api";
 import { useMutation, useQueryClient } from "react-query";
+import { NavLink } from "react-router-dom";
 
 const ElementCatalog = ({ product, isAuth, params, userData }) => {
   const navigate = useNavigate();
@@ -64,14 +65,12 @@ const ElementCatalog = ({ product, isAuth, params, userData }) => {
         </button>
       </form>
       {userData?.isAdmin && (
-        <button className="editing" onClick={handleSubCategoryChange}>
-          Редактировать
-        </button>
+        
+         <i onClick={handleSubCategoryChange} class="changeProduct fa-solid fa-pen"></i>
+        
       )}
       {userData?.isAdmin && (
-        <button className="editing" onClick={mutation.mutate}>
-          Удалить товар из базы
-        </button>
+        <i onClick={mutation.mutate} class="deleteProduct fa-solid fa-minus"></i>
       )}
     </div>
   );
@@ -160,9 +159,7 @@ export const Catalog = () => {
       </div>
       <div className="productAdd">
         {userData?.isAdmin && (
-          <button className="editingAdd" onClick={making}>
-            Добавить новый товар
-          </button>
+         <NavLink to = "/catalog/addProduct" ><i  class="addProduct fa-solid fa-plus"></i></NavLink>
         )}
       </div>
       <div className="catalogContainer">
