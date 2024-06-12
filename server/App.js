@@ -78,6 +78,15 @@ app.post('/api/products', (req, res) => {
 });
 
 
+app.get("/admin/product" ,  async function (req, res){
+  const result = await CartProduct.findAll({
+    where: {purchased : true},
+    include: [Size, Color  , User , Product]
+  });
+  res.send(result);
+})
+
+
 app.get("/categories/:categoryId/subCategories" ,  async function (req, res){
   const { categoryId } = req.params;
   const result = await SubCategories.findAll({

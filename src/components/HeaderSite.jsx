@@ -6,6 +6,7 @@ import { isUserAuth } from "../utils";
 
 export const HeaderSite = () => {
   const query = useQuery("user", user , {enabled: isUserAuth() });
+  const { data: userData } = useQuery("user", user);
   const handleLogout = () => {
     // Удаление jwtToken из localStorage
     localStorage.removeItem("jwtToken");
@@ -23,10 +24,15 @@ export const HeaderSite = () => {
                 <i class="fa-solid fa-bag-shopping"></i>
               </NavLink>
             </li>
+            <div className="productAdd">
+        {userData?.isAdmin && (
+         <NavLink to = "/adminPanel" ><i  class="fa-solid fa-plus"></i></NavLink>
+        )}
+      </div>
         <li>
-        {
+        {!userData?.isAdmin && (
           query.data?  <NavLink to = "/basket" ><i class="basket fa-solid fa-basket-shopping"></i></NavLink> : null
-        }
+        )}
         </li>
         
         <li>

@@ -10,6 +10,17 @@ body {
   font-family: "Playfair Display"
 }
 
+.adminPanel{
+  text-align: center;
+  margin: 50px;
+}
+
+.adminTable{
+  text-align: center;
+  margin: 200px;
+
+}
+
 .color i{
   margin: 5px;
   padding: 5px;

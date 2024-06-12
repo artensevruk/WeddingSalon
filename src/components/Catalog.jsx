@@ -70,7 +70,8 @@ const ElementCatalog = ({ product, isAuth, params, userData }) => {
         
       )}
       {userData?.isAdmin && (
-        <i onClick={mutation.mutate} class="deleteProduct fa-solid fa-minus"></i>
+        <i onClick={mutation.mutate} class="deleteProduct fa-solid fa-xmark"></i>
+       
       )}
     </div>
   );
@@ -81,7 +82,7 @@ export const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { data: userData } = useQuery("user", user);
-  const making = () => {};
+  
 
   const handleSearch = (e) => {
     const query = e.target.value;

@@ -12,7 +12,9 @@ export const getData = async (params = {}) => {
 
 
 
-
+ export const getAdminPurchasedProducts = async () => {
+  return fetchData(`admin/product`, "GET");
+}
 
 
 

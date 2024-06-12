@@ -14,6 +14,7 @@ import { SliderMenu } from './components/Slider';
 import { HomePage } from './components/HomePage';
 import { EditProduct } from './components/EditPoduct';
 import { AddProduct } from './components/AddProduct';
+import { AdminPanel } from './components/AdminPanel';
 
   const router = createBrowserRouter(
     [
@@ -32,6 +33,10 @@ import { AddProduct } from './components/AddProduct';
           {
             path: "catalog/editproduct/:productId?",
             element: <><EditProduct /></>
+          },
+          {
+            path: "adminPanel",
+            element: <><AdminPanel /></>
           },
           {
             path: "catalog/addProduct",
