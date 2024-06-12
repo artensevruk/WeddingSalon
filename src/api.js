@@ -78,10 +78,17 @@ return fetchData(`product/${productId}/${displayKey}`, "POST"  , body);
 export const deleteCatalog = (productCatalog) => {
   return fetchData(`product/${productCatalog.id}`, "DELETE");
 };
-export const purchasedProduct = (productBasket) => {
-  console.log(productBasket)
-  return fetchData(`cartProduct/${productBasket.id}`, "POST");
+
+
+
+export const purchasedProduct = (productBasket , data) => {
+  console.log(data)
+  return fetchData(`cartProduct/${productBasket.id}`, "POST" , data);
 };
+
+
+
+
 export const user =async () => {
   const data = await fetchData("currentUser", "GET")
   return data

@@ -18,6 +18,14 @@ export const CartProduct = sequelize.define('cartProduct', {
     defaultValue: 1,
     allowNull: false
   },
+  address: {
+    type: DataTypes.STRING,
+      defaultValue: null,
+  },
+  phone: {
+    type: DataTypes.STRING,
+      defaultValue: null,
+  },
   purchased: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0

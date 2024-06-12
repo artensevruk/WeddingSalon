@@ -59,10 +59,11 @@ const ElementCatalog = ({ product, isAuth, params, userData }) => {
           />
         </p>
         <p>{product.price} руб</p>
-
+        {!userData?.isAdmin && (
         <button disabled={!isAuth} className="bay2">
           Добавить в корзину
         </button>
+        )}
       </form>
       {userData?.isAdmin && (
         

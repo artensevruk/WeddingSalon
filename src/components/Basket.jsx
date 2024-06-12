@@ -7,9 +7,23 @@ import { purchasedProduct } from "../api";
 import { useParams } from "react-router-dom";
 
 const ElementBasket = ({ productBasket, updateTotalPrice }) => {
-  const params = useParams();
   const [isPurchased, setIsPurchased] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
+
+
+
+  const formDataToJson = (formData) => Object.fromEntries(formData);
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = formDataToJson(formData);
+    console.log(data)
+    mutationBasketProduct.mutate(data)
+  };
+
+
 
   const openForm = () => {
     setIsFormOpen(true);
@@ -19,29 +33,12 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
     setIsFormOpen(false);
   };
 
-  const generateReceipt = () => {
-    const currentDate = new Date().toLocaleDateString();
-    const customerName = document.querySelector('input[placeholder="Ваше имя"]').value;
-    const deliveryAddress = document.querySelector('input[placeholder="Адрес доставки"]').value;
-    const phoneNumber = document.querySelector('input[placeholder="Номер телефона"]').value;
   
-    const receiptContent = `Чек:\nНазвание: ${productBasket.product.name}\nЦена: ${productBasket.product.price} руб\nДата: ${currentDate}\nИмя покупателя: ${customerName}\nАдрес доставки: ${deliveryAddress}\nНомер телефона: ${phoneNumber}`;
-  
-    // Создание и скачивание файла
-    const element = document.createElement("a");
-    const file = new Blob([receiptContent], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "receipt.txt";
-    document.body.appendChild(element);
-    element.click();
-  
-    setIsPurchased(true);
-  };
 
   const queryClient = useQueryClient();
 
   const deleteBasketId = () => deleteBasket(productBasket);
-const productPurchased = () => purchasedProduct(productBasket)
+  const productPurchased = (data) => purchasedProduct(productBasket , data);
 
   const mutation = useMutation(deleteBasketId, {
     onSuccess: () => {
@@ -52,7 +49,8 @@ const productPurchased = () => purchasedProduct(productBasket)
 
   const mutationBasketProduct = useMutation(productPurchased, {
     onSuccess: () => {
-      queryClient.refetchQueries(["productBasket" , params]);
+      closeForm()
+      queryClient.refetchQueries("productBasket");
     },
   });
 
@@ -63,27 +61,49 @@ const productPurchased = () => purchasedProduct(productBasket)
       <p>{productBasket.product.price} руб</p>
       <p>{productBasket.size.size} </p>
       <p>{productBasket.color.color}</p>
-      <div className={isPurchased ? "purchased" : "not-purchased"}>
-        <h3>{isPurchased ? "Товар приобретён" : "Не куплен"}</h3>
+
+      <div className={productBasket.purchased ? "purchased" : "not-purchased"}>
+        <h3>{productBasket.purchased ? "Товар на рассмотрении у администратора" : "Не оформлен"}</h3>
       </div>
       {isFormOpen && (
         <div className="purchase-form">
           <h3>Введите информацию о покупке</h3>
-        <div><input className="fillingForm" type="text" placeholder="Ваше имя" /></div>
-        <div><input className="fillingForm" type="text" placeholder="Адрес доставки" /></div>
-        <div> <input className="fillingForm"  type="text" placeholder="Номер телефона" /></div>
-       
-          <button className="fillingFormButton" onClick={closeForm}>Отмена</button>
-          <button className="fillingFormButton" onClick={mutationBasketProduct.mutate}>Подтвердить покупку</button>
-       
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+              name="address"
+                className="fillingForm"
+                required
+                type="text"
+                placeholder="Адрес доставки"
+              />
+            </div>
+            <div>
+              {" "}
+              <input
+              name="phone"
+                className="fillingForm"
+                required
+                type="text"
+                placeholder="Номер телефона"
+              />
+            </div>
+<p><i class="fa-solid fa-star"></i>При подтверждении покупку через некоторое время <br /> админ свяжется с вами для подтверждения заказа товара</p>
+            <button className="fillingFormButton" onClick={closeForm}>
+              Отмена
+            </button>
+            <button className="fillingFormButton">
+             Подтвердить покупку
+            </button>
+          </form>
         </div>
       )}
-      <button onClick={mutation.mutate} className="bay">
+       {!productBasket.purchased && <button onClick={mutation.mutate} className="bay">
         <i class="fa-solid fa-xmark"></i>
-      </button>
-      <button onClick={openForm} className="bay3">
+      </button>}
+      {!productBasket.purchased &&  <button onClick={openForm} className="bay3">
         Оформить покупку
-      </button>
+      </button>}
     </div>
   );
 };

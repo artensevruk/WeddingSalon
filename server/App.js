@@ -234,11 +234,13 @@ app.delete("/product/:id" , authenticateJWT , async function (req, res){
 })
 
 app.post("/cartProduct/:id" , authenticateJWT , async function (req, res){
-  await CartProduct.update({ purchased: true  } ,{
+  const { phone , address } = req.body;
+  await CartProduct.update({ purchased: true , phone  , address  } ,{
     where: {
       id: req.params.id,
     },
   })
+  console.log(req.body)
   res.status(204).send();
 })
 

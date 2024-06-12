@@ -16,9 +16,20 @@ body {
 }
 
 .adminTable{
-  text-align: center;
-  margin: 200px;
+  margin: 100px;
+ align-items: center;
+}
 
+.tableAdmin{
+  margin: 20px;
+}
+
+.tableAdmin th{
+  border: 1px solid white;
+  padding: 10px;
+}
+.tableAdmin2 td{
+  border: 1px solid white;
 }
 
 .color i{
@@ -67,7 +78,11 @@ body {
   border: 2px solid rgb(229, 226, 226);
   background-color: #c00808;
 }
-
+.addProductToDataBase:hover {
+  background-color: white;
+  cursor: pointer;
+  color: black;
+}
 .aboutUs{
   background-color: rgb(0, 0, 0);
   color:#d73cbb ;
