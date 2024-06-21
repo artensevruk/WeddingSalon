@@ -1,36 +1,36 @@
 import { NavLink } from "react-router-dom";
 import { user } from "../api";
-import { useState, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { isUserAuth } from "../utils";
+import { useState } from "react";
 
 export const HeaderSite = () => {
   const query = useQuery("user", user, { enabled: isUserAuth() });
   const { data: userData } = useQuery("user", user);
   const handleLogout = () => {
-    // Удаление jwtToken из localStorage
     localStorage.removeItem("jwtToken");
-    // Дополнительные действия, например, перенаправление на страницу входа
-    // Обновление страницы
     window.location.reload();
   };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="logo">
-      <ul className="menu">
+      <ul className={`menu ${menuOpen ? "open" : ""}`}>
         <li>
           <NavLink to="/home">
-            <i class="fa-solid fa-house"></i>
+            <i className="basket2 fa-solid fa-house"></i>
           </NavLink>
         </li>
         <li>
           <NavLink to="/catalog">
-            {" "}
-            <i class="fa-solid fa-bag-shopping"></i>
+            <i className="basket2 fa-solid fa-bag-shopping"></i>
           </NavLink>
         </li>
         <li>
           {userData?.isAdmin && (
             <NavLink to="/adminPanel">
-              <i class="fa-solid fa-clipboard"></i>
+              <i className="basket2 fa-solid fa-clipboard"></i>
             </NavLink>
           )}
         </li>
@@ -38,7 +38,7 @@ export const HeaderSite = () => {
           {!userData?.isAdmin &&
             (query.data ? (
               <NavLink to="/basket">
-                <i class="basket fa-solid fa-basket-shopping"></i>
+                <i className="basket2 fa-solid fa-basket-shopping"></i>
               </NavLink>
             ) : null)}
         </li>
@@ -48,7 +48,7 @@ export const HeaderSite = () => {
             query.data.name
           ) : (
             <NavLink to="/entrance">
-              <i className="fa-solid fa-user" />
+              <i className="basket2 fa-solid fa-user" />
             </NavLink>
           )}
         </li>
@@ -60,6 +60,10 @@ export const HeaderSite = () => {
           ) : null}
         </li>
       </ul>
+      {/* Бургер-меню для планшетов */}
+      <div className="burger-menu" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
     </div>
   );
 };

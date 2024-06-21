@@ -89,6 +89,7 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
               />
             </div>
 <p><i class="fa-solid fa-star"></i>При подтверждении покупку через некоторое время <br /> админ свяжется с вами для подтверждения заказа товара</p>
+
             <button className="fillingFormButton" onClick={closeForm}>
               Отмена
             </button>
@@ -127,6 +128,7 @@ export const Basket = () => {
     <div className="basketContainer">
       <div className="title">
         <h1>Корзина</h1>
+       
         <p className="totalPrise">
           Общая сумма: <span>{totalPrice} руб</span>
         </p>

@@ -31,7 +31,7 @@ const ElementSlider = ({ products , isAuth  }) => {
 
   return (
     <div className="slider">
-      <h2 className="newCollection">Новая колекция</h2>
+      <h2 className="newCollection">Новая коллекция</h2>
       <div className={`sliderPosition ${isSliding ? 'slide-out' : 'slide-in'}`}>
         <h3>{products[currentSlide].name}</h3>
         <img className="productName" src={`/${products[currentSlide].image}`} />

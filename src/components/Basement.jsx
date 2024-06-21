@@ -27,17 +27,9 @@ export const Basement = () => {
                 <i className="fa-brands fa-instagram" />
               </a>
             </li>
-            <li>
-              <a href="#">
-                <i className="fa-brands fa-viber" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="fa-brands fa-telegram" />
-              </a>
-            </li>
-            <li></li>
+           
+            
+            
           </ul>
         </div>
       </div>

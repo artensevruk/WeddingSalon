@@ -132,7 +132,7 @@ export const Catalog = () => {
       <hr></hr>
 
       <ScrollButton></ScrollButton>
-      <div className="FilterName">Фильтр</div>
+      <div className="FilterName">Сортировка</div>
       <div className="sortPrice">
         <select
           className="filter"

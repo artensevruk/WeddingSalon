@@ -78,6 +78,9 @@ body {
   border: 2px solid rgb(229, 226, 226);
   background-color: #c00808;
 }
+.social{
+  color: white;
+}
 .addProductToDataBase:hover {
   background-color: white;
   cursor: pointer;
@@ -500,12 +503,50 @@ border-radius: 30px;
   background-color: #c00808;
 }
 
+.basket2{
+  -webkit-text-stroke: 1.3px rgb(185, 11, 145);
+  color: white;
+}
+.basket2:hover{
+  color: #da81ca;
+  cursor: pointer;
+}
 .fillingForm{
+  -webkit-text-stroke: 0.4px rgb(185, 11, 145);
+  border-radius: 20px;
+  border: 2px solid  rgb(185, 11, 145);
   text-align: center;
-  padding: 10px 50px 10px 50px;
+  padding: 10px 100px 10px 100px;
   margin: 5px;
 }
+.burger-menu{
+  display: none ;
+  font-size: calc(3px + 102 * (100vw / 1500));
+  cursor: pointer;
+  margin: 20px;
+}
+@media screen and (max-width: 1024px) {
+  .catalogContainer2{
+    flex-wrap: wrap;
+  }
+  .basementContainer{
+    gap: 10%;
+  }
+  .Contact{
+    display: none;
+  }
+  .menu {
+    display: none; /* Скрываем основное меню на планшетах */
+  }
 
+  .burger-menu {
+    display: block; /* Отображаем бургер-меню на планшетах */
+  }
+
+  .menu.open {
+    display: block; /* Отображаем открытое бургер-меню */
+  }
+}
 .fillingFormButton{
   font-family: "Playfair Display";
   font-size: calc(3px + 12 * (100vw / 1500));
@@ -683,10 +724,7 @@ font-size: calc(4px + 30 * (100vw / 1500));
   font-size: calc(8px + 95 * (100vw / 1500));
   padding-right: 6px;
 }
-.menu .basket:hover{
-color: #ffffff;
-cursor: pointer;
-}
+
 .logoConstructor h1 {
   font-family: "Satisfy", cursive;
   font-weight: 10;

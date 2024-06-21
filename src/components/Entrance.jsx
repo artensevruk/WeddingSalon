@@ -26,7 +26,7 @@ export const Entrance = () => {
           <input type="email"  name="email"  placeholder="ВВЕДИТЕ EMAIL"></input>
         </div>
         <div className="bloc">
-          <input type="password"  name="password" placeholder="ВВЕДИТЕ ПОРОЛЬ"></input>
+          <input type="password"  name="password" placeholder="ВВЕДИТЕ ПАРОЛЬ"></input>
         </div>
         <NavLink to="/registration">
           <p className="entranceToRegestration">

@@ -23,7 +23,7 @@ export const AdminPanel = () => {
 
   return (
     <div className="adminPanel">
-      <h1>Панель администратора</h1>
+      <h1>Заказы</h1>
       <h2>Купленные товары:</h2>
       <table className="adminTable">
         <thead>
