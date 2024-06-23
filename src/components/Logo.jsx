@@ -7,12 +7,13 @@ export const Logo = () => {
       </div>
       <div>
         <div className="socialNetwork">
-        
-            <a className="social" href="https://www.instagram.com/wedding_salon_lamour_?utm_source=qr&igsh=MW9ucmdqYm1peTZ4ZA=="> <i class="fa-brands fa-instagram"></i></a>
-          
-          
-            
-      
+          <a
+            className="social"
+            href="https://www.instagram.com/wedding_salon_lamour_?utm_source=qr&igsh=MW9ucmdqYm1peTZ4ZA=="
+          >
+            {" "}
+            <i class="fa-brands fa-instagram"></i>
+          </a>
         </div>
         <h2 className="weddingSalon">wedding salon</h2>
       </div>
