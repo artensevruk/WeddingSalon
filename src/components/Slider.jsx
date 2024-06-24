@@ -1,4 +1,4 @@
-import { getData, addBasket } from "../api";
+import { getData} from "../api";
 import { useQuery } from "react-query";
 import { isUserAuth } from "../utils";
 
