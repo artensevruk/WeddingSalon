@@ -105,7 +105,7 @@ export const regestrationData = (data) => {
 };
 
 function fetchData(url, method, data) {
-  const apiUrl = `http://localhost:8081/${url}`;
+  const apiUrl = `${process.env.REACT_APP_BASE_API_URL}/${url}`;
 
   const options = {
     method: method,
