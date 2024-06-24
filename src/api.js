@@ -121,11 +121,11 @@ function fetchData(url, method, data) {
   return fetch(apiUrl, reqWithJwt)
     .then(async (response) => {
       let responseData;
-      if (response.status == 201) {
+      if (response.status === 201) {
         //Created  - 201
         return null;
       }
-      if (response.status == 204) {
+      if (response.status === 204) {
         //NO content - 204
         return null;
       }

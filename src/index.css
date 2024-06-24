@@ -775,7 +775,7 @@ font-size: calc(4px + 30 * (100vw / 1500));
 }
 .sortPrice{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 20px;
 }

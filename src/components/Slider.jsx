@@ -25,16 +25,14 @@ const ElementSlider = ({ products , isAuth  }) => {
     }, 500);
   };
 
-  const addBasketProducts = (product) => {
-    addBasket(product);
-  };
+  
 
   return (
     <div className="slider">
       <h2 className="newCollection">Новая коллекция</h2>
       <div className={`sliderPosition ${isSliding ? 'slide-out' : 'slide-in'}`}>
         <h3>{products[currentSlide].name}</h3>
-        <img className="productName" src={`/${products[currentSlide].image}`} />
+        <img alt="product" className="productName" src={`/${products[currentSlide].image}`} />
         
        
       </div>

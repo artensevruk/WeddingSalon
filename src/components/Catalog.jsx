@@ -41,7 +41,7 @@ const ElementCatalog = ({ product, isAuth, params, userData }) => {
     <div className="catalog">
       <form onSubmit={addBasketProducts}>
         <h3>{product.name}</h3>
-        <img src={`/${product.image}`} />
+        <img alt="product" src={`/${product.image}`} />
         <p>
           <Select
            

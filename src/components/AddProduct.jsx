@@ -6,7 +6,7 @@ import { useState } from "react";
 export const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+ 
 
   const fetchCategories = async () => {
     const data = await getDataCategories();

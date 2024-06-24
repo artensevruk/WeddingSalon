@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
 import { getDataBasket, deleteBasket } from "../api";
 import { useMutation, useQueryClient } from "react-query";
-import { useState } from "react";
+import { useState ,useCallback } from "react";
 import { useEffect } from "react";
 import { purchasedProduct } from "../api";
-import { useParams } from "react-router-dom";
+
 
 const ElementBasket = ({ productBasket, updateTotalPrice }) => {
-  const [isPurchased, setIsPurchased] = useState(false);
+ 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
 
@@ -57,7 +57,7 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
   return (
     <div className="basket">
       <h3>{productBasket.product.name}</h3>
-      <img src={productBasket.product.image} />
+      <img alt="product" src={productBasket.product.image} />
       <p>{productBasket.product.price} руб</p>
       <p>{productBasket.size.size} </p>
       <p>{productBasket.color.color}</p>
@@ -112,17 +112,19 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
 export const Basket = () => {
   const query = useQuery("productBasket", getDataBasket);
   const [totalPrice, setTotalPrice] = useState(0);
-  const updateTotalPrice = () => {
+  const updateTotalPrice = useCallback(() => {
     const total = (query.data || []).reduce(
       (acc, product) => parseInt(acc) + parseInt(product.product.price),
       0
     );
     setTotalPrice(total);
-  };
-
-  useEffect(() => {
-    updateTotalPrice();
   }, [query.data]);
+
+
+  
+  useEffect(
+    updateTotalPrice
+  , [updateTotalPrice]);
 
   return (
     <div className="basketContainer">

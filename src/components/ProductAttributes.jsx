@@ -1,4 +1,3 @@
-import { deleteAttributes , addAttributes } from "../api";
 
 import React, { useState } from 'react';
 
