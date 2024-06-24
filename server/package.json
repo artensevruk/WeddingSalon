@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon App.js",
-    "startNode": "node App.js",
+    "start": "node App.js",
+    "startNodemon": "nodemon App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
