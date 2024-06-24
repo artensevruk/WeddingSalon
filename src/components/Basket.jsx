@@ -57,7 +57,7 @@ const ElementBasket = ({ productBasket, updateTotalPrice }) => {
   return (
     <div className="basket">
       <h3>{productBasket.product.name}</h3>
-      <img alt="product" src={productBasket.product.image} />
+      <img alt="product" src={`${process.env.PUBLIC_URL}/${productBasket.product.image}`} />
       <p>{productBasket.product.price} руб</p>
       <p>{productBasket.size.size} </p>
       <p>{productBasket.color.color}</p>

@@ -32,14 +32,14 @@ const ElementSlider = ({ products , isAuth  }) => {
       <h2 className="newCollection">Новая коллекция</h2>
       <div className={`sliderPosition ${isSliding ? 'slide-out' : 'slide-in'}`}>
         <h3>{products[currentSlide].name}</h3>
-        <img alt="product" className="productName" src={`/${products[currentSlide].image}`} />
+        <img alt="product" className="productName" src={`${process.env.PUBLIC_URL}/${products[currentSlide].image}`} />
         
        
       </div>
       <div className="buttonsNavigation">
-        <img className="navigation" onClick={prevSlide} src="/image/arowLeft.png" alt="Previous"></img>
+        <img className="navigation" onClick={prevSlide} src={`${process.env.PUBLIC_URL}/image/arowLeft.png`} alt="Previous"></img>
        <p className="navigationText">Найди для себя свой идеал</p>
-        <img className="navigation" onClick={nextSlide} src="/image/arow.png" alt="Next"></img>
+        <img className="navigation" onClick={nextSlide} src={`${process.env.PUBLIC_URL}/image/arow.png`} alt="Next"></img>
       </div>
       
     </div>
